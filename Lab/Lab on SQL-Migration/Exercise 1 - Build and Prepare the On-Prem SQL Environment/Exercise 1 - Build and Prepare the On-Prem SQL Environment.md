@@ -20,8 +20,6 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
 ### Task 1.2: Install and Configure SQL Server and SSMS
 
-### Task 1.3: Create and Populate the Source Database
-
 1. Click on the **Windows** button on the taskbar, search for **"SSMS"**, and click on **SSMS** to launch SQL Server Management Studio.
 
     ![Step 1.png](../../media/image1.png)
@@ -81,7 +79,11 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 10.png](../../media/image10.png)
 
-11. Click on **New Query** at the top toolbar. When the new query window opens, paste the following SQL query and click **Execute**.
+
+
+### Task 1.3: Create and Populate the Source Database
+
+1. Click on **New Query** at the top toolbar. When the new query window opens, paste the following SQL query and click **Execute**.
 
     ```sql
     USE [master];
@@ -507,19 +509,19 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 11.png](../../media/image11.png)
 
-12. Validate that the message **"Commands completed successfully"** and **"Query executed successfully"** appears at the bottom, confirming the query ran successfully.
+2. Validate that the message **"Commands completed successfully"** and **"Query executed successfully"** appears at the bottom, confirming the query ran successfully.
 
     ![Step 12.png](../../media/image12.png)
 
-13. In the **Object Explorer** on the left panel, click the **Refresh** icon. Then expand **Databases** by clicking the **+** button next to it. You can see the **Retail_Ontology** database has been created successfully.
+3. In the **Object Explorer** on the left panel, click the **Refresh** icon. Then expand **Databases** by clicking the **+** button next to it. You can see the **Retail_Ontology** database has been created successfully.
 
     ![Step 13.png](../../media/image13.png)
 
-14. Expand **Retail_Ontology** by clicking the **+** sign. You can see various objects inside. Expand **Tables** to view the created tables, expand **Views** to see the views, and expand **Programmability** to find **Stored Procedures** and **Functions** by clicking the **+** sign next to each.
+4. Expand **Retail_Ontology** by clicking the **+** sign. You can see various objects inside. Expand **Tables** to view the created tables, expand **Views** to see the views, and expand **Programmability** to find **Stored Procedures** and **Functions** by clicking the **+** sign next to each.
 
     ![Step 14.png](../../media/image14.png)
 
-15. Click on **New Query** at the top toolbar. Paste the following SQL script into the new query window and click **Execute**.
+5. Click on **New Query** at the top toolbar. Paste the following SQL script into the new query window and click **Execute**.
 
     ```sql
     ​USE [Retail_Ontology];
@@ -1087,11 +1089,11 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 15.png](../../media/image15.png)
 
-16. Confirm that the **Messages** tab shows multiple **"(X rows affected)"** messages and **"Query executed successfully"** at the bottom, indicating the data was inserted successfully.
+6. Confirm that the **Messages** tab shows multiple **"(X rows affected)"** messages and **"Query executed successfully"** at the bottom, indicating the data was inserted successfully.
 
     ![Step 16.png](../../media/image16.png)
 
-17. To validate the inserted data, expand **Tables** under **Retail_Ontology** in the Object Explorer, right-click on any table, and select **Select Top 1000 Rows**. You will see the data displayed in the results grid.
+7. To validate the inserted data, expand **Tables** under **Retail_Ontology** in the Object Explorer, right-click on any table, and select **Select Top 1000 Rows**. You will see the data displayed in the results grid.
 
     ![Step 17.png](../../media/image17.png)
 
