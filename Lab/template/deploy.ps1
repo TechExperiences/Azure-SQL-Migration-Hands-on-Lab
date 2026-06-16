@@ -10,9 +10,11 @@ param(
     [string]$SqlCredentialsDir = "",
     [string[]]$SqlRegionCandidates = @(),
     [string[]]$DmsRegionCandidates = @(),
-    [string]$DmsVirtualSubnetId = "",
-    [string]$DmsSkuName = "",
-    [string]$DmsSkuTier = "",
+    [bool]$DeployDmsNetwork = $true,
+    [string]$DmsVnetName = "",
+    [string]$DmsVnetAddressPrefix = "",
+    [string]$DmsSubnetName = "",
+    [string]$DmsSubnetAddressPrefix = "",
     [string]$SqlServerVersion = "",
     [string]$SqlPublicNetworkAccess = "",
     [string]$SqlClientFirewallRulePrefix = "",
@@ -22,12 +24,6 @@ param(
     [string]$SqlBackupStorageRedundancy = "",
     [int]$DeploymentPollIntervalSeconds = 0,
     [int]$DeploymentTimeoutMinutes = 0,
-    [string]$DmsVnetNamePrefix = "",
-    [string]$DmsVnetAddressPrefix = "",
-    [string]$DmsSubnetName = "",
-    [string]$DmsSubnetAddressPrefix = "",
-    [string]$DmsAlternateSubnetName = "",
-    [string]$DmsAlternateSubnetAddressPrefix = "",
     [string[]]$PublicIpSources = @(),
     [string]$AzureServicesFirewallRuleName = "",
     [string]$AutoResourceGroupNamePrefix = "",
@@ -179,9 +175,11 @@ Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlPasswordCharset" -E
 Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlCredentialsDir" -EnvKey "SQL_CREDENTIALS_DIR"
 Set-ParamFromEnvArray  -Settings $envSettings -ParamName "SqlRegionCandidates" -EnvKey "SQL_REGION_CANDIDATES"
 Set-ParamFromEnvArray  -Settings $envSettings -ParamName "DmsRegionCandidates" -EnvKey "DMS_REGION_CANDIDATES"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsVirtualSubnetId" -EnvKey "DMS_VIRTUAL_SUBNET_ID"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSkuName" -EnvKey "DMS_SKU_NAME"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSkuTier" -EnvKey "DMS_SKU_TIER"
+Set-ParamFromEnvBool   -Settings $envSettings -ParamName "DeployDmsNetwork" -EnvKey "DEPLOY_DMS_NETWORK"
+Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsVnetName" -EnvKey "DMS_VNET_NAME"
+Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsVnetAddressPrefix" -EnvKey "DMS_VNET_ADDRESS_PREFIX"
+Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSubnetName" -EnvKey "DMS_SUBNET_NAME"
+Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSubnetAddressPrefix" -EnvKey "DMS_SUBNET_ADDRESS_PREFIX"
 Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlServerVersion" -EnvKey "SQL_SERVER_VERSION"
 Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlPublicNetworkAccess" -EnvKey "SQL_PUBLIC_NETWORK_ACCESS"
 Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlClientFirewallRulePrefix" -EnvKey "SQL_CLIENT_FIREWALL_RULE_PREFIX"
@@ -191,12 +189,6 @@ Set-ParamFromEnvInt    -Settings $envSettings -ParamName "SqlDatabaseSkuCapacity
 Set-ParamFromEnvString -Settings $envSettings -ParamName "SqlBackupStorageRedundancy" -EnvKey "SQL_BACKUP_STORAGE_REDUNDANCY"
 Set-ParamFromEnvInt    -Settings $envSettings -ParamName "DeploymentPollIntervalSeconds" -EnvKey "DEPLOYMENT_POLL_INTERVAL_SECONDS"
 Set-ParamFromEnvInt    -Settings $envSettings -ParamName "DeploymentTimeoutMinutes" -EnvKey "DEPLOYMENT_TIMEOUT_MINUTES"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsVnetNamePrefix" -EnvKey "DMS_VNET_NAME_PREFIX"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsVnetAddressPrefix" -EnvKey "DMS_VNET_ADDRESS_PREFIX"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSubnetName" -EnvKey "DMS_SUBNET_NAME"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsSubnetAddressPrefix" -EnvKey "DMS_SUBNET_ADDRESS_PREFIX"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsAlternateSubnetName" -EnvKey "DMS_ALT_SUBNET_NAME"
-Set-ParamFromEnvString -Settings $envSettings -ParamName "DmsAlternateSubnetAddressPrefix" -EnvKey "DMS_ALT_SUBNET_ADDRESS_PREFIX"
 Set-ParamFromEnvArray  -Settings $envSettings -ParamName "PublicIpSources" -EnvKey "PUBLIC_IP_SOURCES"
 Set-ParamFromEnvString -Settings $envSettings -ParamName "AzureServicesFirewallRuleName" -EnvKey "AZURE_SERVICES_FIREWALL_RULE_NAME"
 Set-ParamFromEnvString -Settings $envSettings -ParamName "AutoResourceGroupNamePrefix" -EnvKey "AUTO_RESOURCE_GROUP_NAME_PREFIX"
@@ -402,314 +394,6 @@ function Get-PreferredRegions {
     }
 
     return @($ordered)
-}
-
-function Get-VNetAndSubnetFromSubnetId {
-    param(
-        [Parameter(Mandatory = $true)] [string]$SubnetId
-    )
-
-    $pattern = "^/subscriptions/[^/]+/resourceGroups/[^/]+/providers/Microsoft\.Network/virtualNetworks/(?<vnet>[^/]+)/subnets/(?<subnet>[^/]+)$"
-    $match = [System.Text.RegularExpressions.Regex]::Match($SubnetId, $pattern, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
-    if (-not $match.Success) {
-        throw "Invalid subnet resource ID format: $SubnetId"
-    }
-
-    return @{
-        vnetName = $match.Groups["vnet"].Value
-        subnetName = $match.Groups["subnet"].Value
-    }
-}
-
-function Get-DmsSubnetMetadata {
-    param(
-        [Parameter(Mandatory = $true)] [string]$SubnetId
-    )
-
-    $parts = Get-VNetAndSubnetFromSubnetId -SubnetId $SubnetId
-    $vnetName = $parts.vnetName
-    $subnetName = $parts.subnetName
-
-    $subnetJson = az network vnet subnet show `
-        --ids $SubnetId `
-        --query "{id:id,delegations:delegations,vnetId:id}" `
-        --output json `
-        --only-show-errors
-
-    if ($LASTEXITCODE -ne 0) {
-        throw "Unable to resolve subnet by ID: $SubnetId"
-    }
-
-    $subnet = $subnetJson | ConvertFrom-Json
-    $delegated = $false
-    foreach ($delegation in @($subnet.delegations)) {
-        if ($delegation.serviceName -eq "Microsoft.DataMigration/services") {
-            $delegated = $true
-            break
-        }
-    }
-
-    $vnetId = [string]$subnet.vnetId
-    if ($vnetId -match "/subnets/[^/]+$") {
-        $vnetId = $vnetId -replace "/subnets/[^/]+$", ""
-    }
-
-    $vnetRegionRaw = az network vnet show `
-        --ids $vnetId `
-        --query "location" `
-        --output tsv `
-        --only-show-errors
-
-    if ($LASTEXITCODE -ne 0) {
-        throw "Unable to determine region for VNet backing subnet: $SubnetId"
-    }
-
-    return @{
-        subnetId = [string]$subnet.id
-        region = $vnetRegionRaw.Trim().ToLower()
-        delegated = $delegated
-        vnetName = $vnetName
-        subnetName = $subnetName
-    }
-}
-
-function Find-DelegatedDmsSubnetInResourceGroup {
-    param(
-        [Parameter(Mandatory = $true)] [string]$ResourceGroup,
-        [Parameter(Mandatory = $true)] [string[]]$PreferredRegions
-    )
-
-    $vnetProbe = Invoke-AzProbe -Arguments @(
-        "network", "vnet", "list",
-        "--resource-group", $ResourceGroup,
-        "--query", "[].{name:name,location:location}",
-        "--output", "json",
-        "--only-show-errors"
-    ) -SuppressStderr
-
-    if ($vnetProbe.ExitCode -ne 0) {
-        throw "Failed to list VNets in resource group '$ResourceGroup'."
-    }
-
-    $vnets = @($vnetProbe.Output | ConvertFrom-Json)
-    if ($vnets.Count -eq 0) {
-        return $null
-    }
-
-    $matches = @()
-    foreach ($vnet in $vnets) {
-        $vnetName = [string]$vnet.name
-        if ([string]::IsNullOrWhiteSpace($vnetName)) {
-            continue
-        }
-
-        $subnetProbe = Invoke-AzProbe -Arguments @(
-            "network", "vnet", "subnet", "list",
-            "--resource-group", $ResourceGroup,
-            "--vnet-name", $vnetName,
-            "--query", "[].{id:id,name:name,delegations:delegations}",
-            "--output", "json",
-            "--only-show-errors"
-        ) -SuppressStderr
-
-        if ($subnetProbe.ExitCode -ne 0) {
-            continue
-        }
-
-        $subnets = @($subnetProbe.Output | ConvertFrom-Json)
-        foreach ($subnet in $subnets) {
-            $delegationServices = @()
-            foreach ($delegation in @($subnet.delegations)) {
-                if (-not [string]::IsNullOrWhiteSpace($delegation.serviceName)) {
-                    $delegationServices += [string]$delegation.serviceName
-                }
-            }
-
-            $hasDataMigrationDelegation = $delegationServices -contains "Microsoft.DataMigration/services"
-            $hasAnyDelegation = $delegationServices.Count -gt 0
-            $safeForDms = $hasDataMigrationDelegation -or (-not $hasAnyDelegation)
-            if (-not $safeForDms) {
-                continue
-            }
-
-            $score = 0
-            if ([string]$vnet.name -like "$DmsVnetNamePrefix-*") { $score += 4 }
-            if ([string]$subnet.name -like "*dms*") { $score += 3 }
-            if ($hasDataMigrationDelegation) { $score += 5 }
-            if (-not $hasAnyDelegation) { $score += 2 }
-
-            $matches += @{
-                subnetId = [string]$subnet.id
-                region = [string]$vnet.location
-                source = "discovered"
-                score = $score
-            }
-        }
-    }
-
-    if ($matches.Count -eq 0) {
-        return $null
-    }
-
-    foreach ($preferredRegion in $PreferredRegions) {
-        $byRegion = @(
-            $matches |
-            Where-Object { $_.region.ToLower() -eq $preferredRegion.ToLower() } |
-            Sort-Object -Property score -Descending
-        )
-        if ($byRegion.Count -gt 0) {
-            return $byRegion[0]
-        }
-    }
-
-    return ($matches | Sort-Object -Property score -Descending | Select-Object -First 1)
-}
-
-function Ensure-DmsDelegatedSubnet {
-    param(
-        [Parameter(Mandatory = $true)] [string]$ResourceGroup,
-        [Parameter(Mandatory = $true)] [string]$RgToken,
-        [Parameter(Mandatory = $true)] [string[]]$PreferredRegions
-    )
-
-    $targetRegion = $PreferredRegions[0].ToLower()
-    $baseToken = ($RgToken.ToLower() -replace "[^a-z0-9]", "")
-    if ([string]::IsNullOrWhiteSpace($baseToken)) {
-        $baseToken = $RgTokenFallbackText
-    }
-
-    $vnetName = "$DmsVnetNamePrefix-$baseToken"
-    if ($vnetName.Length -gt 64) {
-        $vnetName = $vnetName.Substring(0, 64)
-    }
-
-    $subnetName = $DmsSubnetName
-    $alternateSubnetName = $DmsAlternateSubnetName
-    $vnetExists = $false
-    $vnetProbe = Invoke-AzProbe -Arguments @(
-        "network", "vnet", "show",
-        "--resource-group", $ResourceGroup,
-        "--name", $vnetName,
-        "--query", "{name:name,location:location}",
-        "--output", "json",
-        "--only-show-errors"
-    ) -SuppressStderr
-
-    if ($vnetProbe.ExitCode -eq 0) {
-        $vnet = $vnetProbe.Output | ConvertFrom-Json
-        if ($vnet.location.ToLower() -eq $targetRegion) {
-            $vnetExists = $true
-        }
-    }
-
-    if (-not $vnetExists) {
-        Write-Host "Creating VNet '$vnetName' in '$targetRegion' for DMS..." -ForegroundColor Cyan
-        az network vnet create `
-            --resource-group $ResourceGroup `
-            --name $vnetName `
-            --location $targetRegion `
-            --address-prefixes $DmsVnetAddressPrefix `
-            --output none `
-            --only-show-errors
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "Failed to create VNet '$vnetName' in '$targetRegion' for DMS."
-        }
-    }
-
-    $subnetProbe = Invoke-AzProbe -Arguments @(
-        "network", "vnet", "subnet", "show",
-        "--resource-group", $ResourceGroup,
-        "--vnet-name", $vnetName,
-        "--name", $subnetName,
-        "--query", "{id:id,delegations:delegations}",
-        "--output", "json",
-        "--only-show-errors"
-    ) -SuppressStderr
-
-    if ($subnetProbe.ExitCode -ne 0) {
-        Write-Host "Creating DMS subnet '$subnetName' in VNet '$vnetName'..." -ForegroundColor Cyan
-        az network vnet subnet create `
-            --resource-group $ResourceGroup `
-            --vnet-name $vnetName `
-            --name $subnetName `
-            --address-prefixes $DmsSubnetAddressPrefix `
-            --output none `
-            --only-show-errors
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "Failed to create DMS subnet '$subnetName' in VNet '$vnetName'."
-        }
-    } else {
-        $subnet = $subnetProbe.Output | ConvertFrom-Json
-        $hasAnyDelegation = @($subnet.delegations).Count -gt 0
-        if ($hasAnyDelegation) {
-            Write-Host "Existing subnet '$subnetName' has delegation(s). Creating dedicated subnet '$alternateSubnetName'..." -ForegroundColor Yellow
-            az network vnet subnet create `
-                --resource-group $ResourceGroup `
-                --vnet-name $vnetName `
-                --name $alternateSubnetName `
-                --address-prefixes $DmsAlternateSubnetAddressPrefix `
-                --output none `
-                --only-show-errors
-
-            if ($LASTEXITCODE -ne 0) {
-                throw "Failed to create dedicated DMS subnet '$alternateSubnetName' in VNet '$vnetName'."
-            }
-
-            $subnetName = $alternateSubnetName
-        }
-    }
-
-    $resolvedSubnetId = az network vnet subnet show `
-        --resource-group $ResourceGroup `
-        --vnet-name $vnetName `
-        --name $subnetName `
-        --query "id" `
-        --output tsv `
-        --only-show-errors
-
-    if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($resolvedSubnetId)) {
-        throw "Failed to resolve subnet ID for '$vnetName/$subnetName'."
-    }
-
-    return @{
-        subnetId = $resolvedSubnetId.Trim()
-        region = $targetRegion
-        source = "created"
-    }
-}
-
-function Resolve-DmsVirtualSubnetId {
-    param(
-        [string]$ProvidedSubnetId,
-        [Parameter(Mandatory = $true)] [string]$ResourceGroup,
-        [Parameter(Mandatory = $true)] [string]$RgToken,
-        [Parameter(Mandatory = $true)] [string[]]$PreferredRegions
-    )
-
-    if (-not [string]::IsNullOrWhiteSpace($ProvidedSubnetId)) {
-        $provided = Get-DmsSubnetMetadata -SubnetId $ProvidedSubnetId
-        Write-Host "[OK] Using user-provided DMS subnet." -ForegroundColor Green
-        if (-not $provided.delegated) {
-            Write-Host "[WARN] Subnet is not delegated to Microsoft.DataMigration/services. Continuing because many subscriptions do not support that delegation for DMS." -ForegroundColor Yellow
-        }
-        return @{
-            subnetId = $provided.subnetId
-            region = $provided.region
-            source = "provided"
-        }
-    }
-
-    Write-Host "No DMS subnet provided. Searching existing suitable subnets in '$ResourceGroup'..." -ForegroundColor Cyan
-    $discovered = Find-DelegatedDmsSubnetInResourceGroup -ResourceGroup $ResourceGroup -PreferredRegions $PreferredRegions
-    if ($null -ne $discovered) {
-        Write-Host "[OK] Reusing existing subnet for DMS: $($discovered.subnetId)" -ForegroundColor Green
-        return $discovered
-    }
-
-    Write-Host "No suitable DMS subnet found. Creating one automatically..." -ForegroundColor Cyan
-    return (Ensure-DmsDelegatedSubnet -ResourceGroup $ResourceGroup -RgToken $RgToken -PreferredRegions $PreferredRegions)
 }
 
 function Ensure-SqlFirewallRule {
@@ -1104,13 +788,15 @@ function Assert-TemplateIsSqlDmsOnly {
     $resourceTypes = @($matches | ForEach-Object { $_.Value } | Sort-Object -Unique)
     $disallowed = @(
         $resourceTypes | Where-Object {
-            ($_ -notlike "Microsoft.Sql/*") -and ($_ -notlike "Microsoft.DataMigration/*")
+            ($_ -notlike "Microsoft.Sql/*") -and
+            ($_ -notlike "Microsoft.DataMigration/*") -and
+            ($_ -notlike "Microsoft.Network/virtualNetworks*")
         }
     )
 
     if ($disallowed.Count -gt 0) {
         $badList = ($disallowed -join ", ")
-        throw "Template contains non-SQL/DMS resource types: $badList"
+        throw "Template contains unsupported resource types: $badList"
     }
 }
 
@@ -1186,15 +872,6 @@ if ([string]::IsNullOrWhiteSpace($SqlClientFirewallRulePrefix)) {
 }
 if ([string]::IsNullOrWhiteSpace($AutoResourceGroupNamePrefix)) {
     throw "AutoResourceGroupNamePrefix cannot be empty."
-}
-if ([string]::IsNullOrWhiteSpace($DmsVnetNamePrefix)) {
-    throw "DmsVnetNamePrefix cannot be empty."
-}
-if ([string]::IsNullOrWhiteSpace($DmsSubnetName)) {
-    throw "DmsSubnetName cannot be empty."
-}
-if ([string]::IsNullOrWhiteSpace($DmsAlternateSubnetName)) {
-    throw "DmsAlternateSubnetName cannot be empty."
 }
 if ([string]::IsNullOrWhiteSpace($AzureServicesFirewallRuleName)) {
     throw "AzureServicesFirewallRuleName cannot be empty."
@@ -1307,6 +984,17 @@ if ([string]::IsNullOrWhiteSpace($SqlOutputResourceNameKey)) {
 if ([string]::IsNullOrWhiteSpace($DmsOutputResourceNameKey)) {
     throw "DmsOutputResourceNameKey cannot be empty."
 }
+if ($DeployDmsNetwork) {
+    if ([string]::IsNullOrWhiteSpace($DmsVnetAddressPrefix)) {
+        throw "DmsVnetAddressPrefix cannot be empty when DeployDmsNetwork is true."
+    }
+    if ([string]::IsNullOrWhiteSpace($DmsSubnetName)) {
+        throw "DmsSubnetName cannot be empty when DeployDmsNetwork is true."
+    }
+    if ([string]::IsNullOrWhiteSpace($DmsSubnetAddressPrefix)) {
+        throw "DmsSubnetAddressPrefix cannot be empty when DeployDmsNetwork is true."
+    }
+}
 
 $effectiveSqlPublicNetworkAccess = $SqlPublicNetworkAccess
 if ($effectiveSqlPublicNetworkAccess -eq "Disabled") {
@@ -1317,15 +1005,7 @@ if ($effectiveSqlPublicNetworkAccess -eq "Disabled") {
 $effectiveSuffix = New-UniqueSuffix -RequestedSuffix $Suffix
 $effectiveBicepRunDateTime = Resolve-BicepRunDateTime -ConfiguredValue $BicepRunDateTime
 $rgToken = Get-RgToken -RgName $ResourceGroupName
-$preferredDmsRegions = Get-PreferredRegions -Candidates $DmsRegionCandidates -Fallback $Location
-$resolvedDmsSubnet = Resolve-DmsVirtualSubnetId `
-    -ProvidedSubnetId $DmsVirtualSubnetId `
-    -ResourceGroup $ResourceGroupName `
-    -RgToken $rgToken `
-    -PreferredRegions $preferredDmsRegions
-
-$DmsVirtualSubnetId = $resolvedDmsSubnet.subnetId
-$resolvedDmsRegionCandidates = @($resolvedDmsSubnet.region)
+$resolvedDmsRegionCandidates = Get-PreferredRegions -Candidates $DmsRegionCandidates -Fallback $Location
 
 $pwdChars = $SqlPasswordCharset
 $sqlAdminPassword = -join ((1..$SqlAdminPasswordLength) | ForEach-Object { $pwdChars[(Get-Random -Maximum $pwdChars.Length)] })
@@ -1351,9 +1031,11 @@ $commonParams = @(
     "sqlDatabaseSkuTier=$SqlDatabaseSkuTier",
     "sqlDatabaseSkuCapacity=$SqlDatabaseSkuCapacity",
     "sqlBackupStorageRedundancy=$SqlBackupStorageRedundancy",
-    "dmsVirtualSubnetId=$DmsVirtualSubnetId",
-    "dmsSkuName=$DmsSkuName",
-    "dmsSkuTier=$DmsSkuTier"
+    "deployDmsNetwork=$(Convert-BoolToBicepString -Value $DeployDmsNetwork)",
+    "dmsVnetName=$DmsVnetName",
+    "dmsVnetAddressPrefix=$DmsVnetAddressPrefix",
+    "dmsSubnetName=$DmsSubnetName",
+    "dmsSubnetAddressPrefix=$DmsSubnetAddressPrefix"
 )
 $toggleParamsSqlStep = @(
     "deploySql=$(Convert-BoolToBicepString -Value $DeploySqlForSqlStep)",
@@ -1426,6 +1108,4 @@ Write-Host "  SQL Database:            $sqlDatabaseName"
 Write-Host "  SQL Admin Login:         $SqlAdminLogin"
 Write-Host "  SQL Admin Password:      $sqlAdminPassword"
 Write-Host "  DMS Service:             $dmsServiceName ($dmsRegion)"
-Write-Host "  DMS Subnet Id:           $DmsVirtualSubnetId"
-Write-Host "  DMS Subnet Source:       $($resolvedDmsSubnet.source)"
 Write-Host "  SQL Credential File:     $credentialFiles"
