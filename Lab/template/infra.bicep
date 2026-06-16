@@ -35,6 +35,9 @@ param sqlLocation string = location
 @description('Location for Azure Database Migration Service.')
 param dmsLocation string = location
 
+@description('Create a dedicated VNet/subnet for SQL Migration Service.')
+param deployDmsNetwork bool = true
+
 @description('Azure SQL Server admin login.')
 param sqlAdminLogin string = 'sqladmin'
 
@@ -65,15 +68,6 @@ param sqlDatabaseSkuCapacity int = 5
 @description('Azure SQL requested backup storage redundancy.')
 param sqlBackupStorageRedundancy string = 'Local'
 
-@description('Azure Database Migration Service SKU name.')
-param dmsSkuName string = 'Premium_4vCores'
-
-@description('Azure Database Migration Service SKU tier.')
-param dmsSkuTier string = 'Premium'
-
-@description('Resource ID of the delegated subnet for DMS.')
-param dmsVirtualSubnetId string
-
 var normalizedSuffix = toLower(empty(suffix) ? take(uniqueString(subscription().id, resourceGroup().id, runDateTime), generatedSuffixLength) : suffix)
 var rgToken = take(toLower(replace(resourceGroup().name, '-', '')), rgTokenLength)
 
@@ -86,9 +80,42 @@ param sqlDatabaseName string = ''
 @description('Azure Database Migration Service name.')
 param dmsServiceName string = ''
 
+@description('DMS VNet name. If empty, a generated name is used.')
+param dmsVnetName string = ''
+
+@description('DMS VNet address prefix.')
+param dmsVnetAddressPrefix string = '10.250.0.0/16'
+
+@description('DMS subnet name.')
+param dmsSubnetName string = 'snet-dms'
+
+@description('DMS subnet address prefix.')
+param dmsSubnetAddressPrefix string = '10.250.1.0/24'
+
 var effectiveSqlServerName = empty(sqlServerName) ? 'sql-${rgToken}-${deploymentAttemptLabel}-${normalizedSuffix}' : sqlServerName
 var effectiveSqlDatabaseName = empty(sqlDatabaseName) ? 'sqldb-${rgToken}-${deploymentAttemptLabel}-${normalizedSuffix}' : sqlDatabaseName
 var effectiveDmsServiceName = empty(dmsServiceName) ? 'dms-${rgToken}-${deploymentAttemptLabel}-${normalizedSuffix}' : dmsServiceName
+var effectiveDmsVnetName = empty(dmsVnetName) ? 'vnet-dms-${rgToken}-${deploymentAttemptLabel}-${normalizedSuffix}' : dmsVnetName
+
+resource dmsVnet 'Microsoft.Network/virtualNetworks@2023-09-01' = if (deployDms && deployDmsNetwork) {
+  name: effectiveDmsVnetName
+  location: dmsLocation
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        dmsVnetAddressPrefix
+      ]
+    }
+  }
+}
+
+resource dmsSubnet 'Microsoft.Network/virtualNetworks/subnets@2023-09-01' = if (deployDms && deployDmsNetwork) {
+  parent: dmsVnet
+  name: dmsSubnetName
+  properties: {
+    addressPrefix: dmsSubnetAddressPrefix
+  }
+}
 
 resource sqlServer 'Microsoft.Sql/servers@2023-05-01-preview' = if (deploySql) {
   name: effectiveSqlServerName
@@ -115,15 +142,13 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2023-05-01-preview' = if (
   }
 }
 
-resource dmsService 'Microsoft.DataMigration/services@2018-04-19' = if (deployDms) {
+// SQL Migration Service (new DMS) resource.
+resource dmsService 'Microsoft.DataMigration/SqlMigrationServices@2025-06-30' = if (deployDms) {
   name: effectiveDmsServiceName
   location: dmsLocation
-  sku: {
-    name: dmsSkuName
-    tier: dmsSkuTier
-  }
-  properties: {
-    virtualSubnetId: dmsVirtualSubnetId
+  tags: {
+    dmsNetworkMode: deployDmsNetwork ? 'dedicated-vnet' : 'none'
+    dmsSubnetResourceId: (deployDms && deployDmsNetwork) ? dmsSubnet.id : 'none'
   }
 }
 
@@ -135,3 +160,6 @@ output sqlLocation string = sqlLocation
 output dmsServiceName string = deployDms ? dmsService.name : ''
 output dmsServiceId string = deployDms ? dmsService.id : ''
 output dmsLocation string = dmsLocation
+output dmsVnetName string = (deployDms && deployDmsNetwork) ? dmsVnet.name : ''
+output dmsSubnetId string = (deployDms && deployDmsNetwork) ? dmsSubnet.id : ''
+
