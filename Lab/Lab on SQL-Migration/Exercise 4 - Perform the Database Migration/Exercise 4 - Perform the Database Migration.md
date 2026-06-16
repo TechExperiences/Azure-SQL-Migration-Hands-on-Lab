@@ -13,13 +13,11 @@ In this exercise, you will create and configure a migration project, connect the
 - OnPrem database migrated to Azure SQL Database
 - Migration results reviewed and verified
 
-### Task 4.1: Create a New Migration​
+### Task 4.1: Configure the Migration
 
-### Task 4.2: Configure the Migration Project​
+### Task 4.2: Select the Source Database and Run the Migration​
 
-### Task 4.3: Select the Source Database and Run the Migration​
-
-### Task 4.4: Review the Migration Results
+### Task 4.3: Review the Migration Results
 
 ## What We Learned
 
