@@ -67,7 +67,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 9. A new query window will open. Paste the following SQL query into the query editor:
 
     ```sql
-    CREATE LOGIN pocadmin WITH PASSWORD = 'YourPassword @123';
+    CREATE LOGIN pocadmin WITH PASSWORD = 'YourPassword@123';
     ALTER SERVER ROLE sysadmin ADD MEMBER pocadmin;
     ```
 

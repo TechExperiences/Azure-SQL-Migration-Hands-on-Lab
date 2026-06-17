@@ -49,7 +49,7 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
     ![Step 7.png](../../media/image32.png)
 
-### Task 3.2: Install and Register the Self-Hosted Integration Runtime​
+### Task 3.2: Configure the Self-Hosted Integration Runtime​ Service
 
 8. Click on the **Windows** button on the taskbar, search for **"Microsoft Integration Runtime"**, and click on **Microsoft Integration Runtime** to launch it.
 
