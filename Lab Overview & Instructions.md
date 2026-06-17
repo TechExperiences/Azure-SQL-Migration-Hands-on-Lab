@@ -12,13 +12,13 @@ To address these challenges, Zava adopts **Azure SQL Database** and **Azure Data
 
 # Personas in the Scenario
 
-### Mark — Database Administrator
+**Mark — Database Administrator**
 Responsible for maintaining and modernizing Zava's SQL Server environment.
 
-### Jessie — Business Intelligence Analyst
+**Jessie — Business Intelligence Analyst**
 Responsible for transforming business data into insights that support leadership decision-making.
 
-### April — CEO
+**April — CEO**
 Focused on growth, customer experience, and business performance.
 
 ---
