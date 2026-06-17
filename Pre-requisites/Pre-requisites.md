@@ -22,6 +22,24 @@ The following software must be installed and configured on the participant's loc
 | Self-Hosted Integration Runtime           | Securely connects on-premises SQL Server to Azure DMS    | [Download Microsoft Integration Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=39717) |
  
 ---
+
+## On-Premises Database Setup
+
+A 📦 .zip folder containing database setup files is provided for this lab. This folder includes:
+
+* **📄 SQL files (.sql)**: Contains the schema and data scripts required to set up the source database on your on-premises SQL Server.
+* **⚙️ Batch file (.bat)**: Contains automated commands to execute the database setup.
+
+### Setup Instructions
+
+1. Extract the provided 📦 `.zip` folder to a local directory on your workstation.
+2. Locate the ⚙️ `.bat` file inside the extracted folder.
+3. Right-click the ⚙️ `.bat` file and select **Run as Administrator**.
+4. The on-premises database setup will automatically complete.
+
+> **Important:** Ensure SQL Server is running and SQL Server Authentication is enabled before executing the batch file.
+
+---
  
 ## Lab Environment
  
@@ -102,6 +120,7 @@ Before beginning the lab, verify the following.
 | --------------------------------------------------- | ------ |
 | Azure subscription is accessible                    | ✅      |
 | SQL Server and SSMS are installed on the workstation | ✅      |
+| On-premises database has been set up using .bat file | ✅      |
 | Azure SQL Logical Server is provisioned             | ✅      |
 | Azure SQL Database (`RetailsDB`) is available         | ✅      |
 | Azure Database Migration Service (DMS) is available | ✅      |
