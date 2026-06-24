@@ -1,20 +1,20 @@
-# Exercise 4: Validate the Migrated Azure SQL Database
+# Exercise 4: Validate the Migrated Azure SQL Database-Hyperscale
 
-The migration to Azure SQL Database is now complete, but a successful migration is about more than moving data. Before Zava can rely on the new platform for reporting, analytics, and decision-making, the migrated environment must be validated to ensure data accuracy and functionality.
+The migration to Azure SQL Database-Hyperscale is now complete, but a successful migration is about more than moving data. Before Zava can rely on the new platform for reporting, analytics, and decision-making, the migrated environment must be validated to ensure data accuracy and functionality.
 
 Jessie, a Business Intelligence Analyst, is preparing for an upcoming leadership review and needs confidence that the migrated sales data is complete, accurate, and ready for business use. Together, Mark and Jessie validate the migrated database, confirm that all database objects were transferred successfully, and verify that the data can support future reporting and analytics workloads.
 
-In this exercise, you will connect to the migrated Azure SQL Database, verify migrated database objects, and validate that the data and database functionality have been successfully preserved during the migration process.
+In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale, verify migrated database objects, and validate that the data and database functionality have been successfully preserved during the migration process.
 
 ## ✅ Outcome
 
-- Successfully connected to the migrated Azure SQL Database
+- Successfully connected to the migrated Azure SQL Database-Hyperscale
 - Data consistency validated between source and target environments
 - Views, stored procedures, functions, and triggers are tested successfully
 - Migrated database confirmed ready for reporting and analytics
 
-### Task 4.1: Connect to the Migrated Azure SQL Database​
-1. Click on the **Target database** link (**sqldb-rgworkiqlab-f1-06151713336**) in the Migrations table to view the migrated Azure SQL Database.
+### Task 4.1: Connect to the Migrated Azure SQL Database-Hyperscale​
+1. Click on the **Target database** link (**sqldb-rgworkiqlab-f1-06151713336**) in the Migrations table to view the migrated Azure SQL Database-Hyperscale.
 
 	![Step 1.png](../../media/image49.png)
 
@@ -52,7 +52,7 @@ In this exercise, you will connect to the migrated Azure SQL Database, verify mi
 
 ## What We Learned
 
-- How to connect to and validate a migrated Azure SQL Database via Query Editor
+- How to connect to and validate a migrated Azure SQL Database-Hyperscale via Query Editor
 - How to verify migrated database objects and dependencies
 - How to validate data integrity and functionality after migration
 - How to test views, stored procedures, and functions in the target environment
@@ -62,5 +62,6 @@ In this exercise, you will connect to the migrated Azure SQL Database, verify mi
 
 ## Conclusion
 
-You have successfully validated the migrated Azure SQL Database and confirmed that Zava's retail transaction data has been successfully modernized. By verifying database objects, validating data consistency, and testing database functionality, you ensured that the migrated environment is ready for business use. 
+You have successfully validated the migrated Azure SQL Database-Hyperscale and confirmed that Zava's retail transaction data has been successfully modernized. By verifying database objects, validating data consistency, and testing database functionality, you ensured that the migrated environment is ready for business use. 
+
 

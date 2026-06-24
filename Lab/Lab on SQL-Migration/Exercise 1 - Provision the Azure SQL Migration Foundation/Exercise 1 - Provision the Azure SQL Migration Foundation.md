@@ -15,10 +15,10 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 - Sample retail business database created
 - Business data loaded and validated
 - On-premises source system prepared for migration
-- Azure SQL Logical Server and Azure SQL Database reviewed and validated
+- Azure SQL Logical Server and Azure SQL Database-Hyperscale reviewed and validated
 - Firewall rules configured to enable secure connectivity
 - Database connectivity verified through the Azure Portal Query Editor
-- Target Azure SQL Database confirmed ready for migration
+- Target Azure SQL Database-Hyperscale confirmed ready for migration
 - Cloud migration foundation established for the next phase of modernization
 
 
@@ -132,7 +132,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 7.png](../../media/image25.png)
 
-### Task 1.4: Test Azure SQL Database Connection and Verify Empty State
+### Task 1.4: Test Azure SQL Database-Hyperscale Connection and Verify Empty State
 
 8. In the left panel, expand **Settings** and click on **SQL databases**. Then click on **sqldb-rgworkiqlab-f1-06151713336** from the database list.
 
@@ -174,10 +174,11 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 - How on-premises systems continue to serve as critical data sources in many organizations
 - How to review and validate Azure SQL migration resources
 - How to configure firewall rules to enable secure database connectivity
-- How to connect to Azure SQL Database using the Azure Portal Query Editor
+- How to connect to Azure SQL Database-Hyperscale using the Azure Portal Query Editor
 - How to verify that a target database is prepared for migration
 - How proper environment preparation reduces migration risk and improves reliability
 
 ## Next Exercise
 
-In the next exercise (Exercise 2), Mark will configure the Azure Database Migration Service, install and register the Self-Hosted Integration Runtime, and establish secure connectivity between the on-premises SQL Server environment and Azure SQL Database. These steps will ensure that the migration infrastructure is in place and ready to support the upcoming migration process.
+In the next exercise (Exercise 2), Mark will configure the Azure Database Migration Service, install and register the Self-Hosted Integration Runtime, and establish secure connectivity between the on-premises SQL Server environment and Azure SQL Database-Hyperscale. These steps will ensure that the migration infrastructure is in place and ready to support the upcoming migration process.
+

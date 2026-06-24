@@ -2,7 +2,7 @@
 
 With the migration infrastructure in place, Zava is ready to modernize its retail data platform. The on-premises SQL Server environment contains years of valuable sales transaction data that remains isolated from the organization's cloud-based customer and campaign systems.
 
-Using Azure Database Migration Service, the retail transaction database can now be migrated to Azure SQL Database, bringing Zava one step closer to a unified data foundation that supports analytics, reporting, and future AI-driven initiatives.
+Using Azure Database Migration Service, the retail transaction database can now be migrated to Azure SQL Database-Hyperscale, bringing Zava one step closer to a unified data foundation that supports analytics, reporting, and future AI-driven initiatives.
 
 In this exercise, you will create and configure a migration project, connect the source and target environments, migrate the On-Prem database, and validate that all schema objects and data have been successfully transferred.
 
@@ -10,12 +10,12 @@ In this exercise, you will create and configure a migration project, connect the
 
 - Azure Database Migration Service migration project successfully created
 - Source and target database connections configured and validated
-- OnPrem database migrated to Azure SQL Database
+- OnPrem database migrated to Azure SQL Database-Hyperscale
 - Migration results reviewed and verified
 
 ### Task 3.1: Configure the Source Database in Migration Wizard
 
-1. In the **Azure SQL Database Offline Migration Wizard**, under the **Source details** tab, after clicking **Select** in the previous step, set **Is your source SQL Server instance tracked in Azure?** to **No**. Then open the **Source Infrastructure Type** dropdown and select **Virtual Machine**.
+1. In the Azure SQL Database-Hyperscale Offline Migration Wizard, under the **Source details** tab, after clicking **Select** in the previous step, set **Is your source SQL Server instance tracked in Azure?** to **No**. Then open the **Source Infrastructure Type** dropdown and select **Virtual Machine**.
 
 	![Step 1.png](../../media/image39.png)
 
@@ -27,7 +27,7 @@ In this exercise, you will create and configure a migration project, connect the
 
 	![Step 3.png](../../media/image41.png)
 
-4. On the **Select databases for migration** page, select the checkbox for **Retail_Ontology**, verify it is selected, and then click **Next: Connect to target Azure SQL Database >>**.
+4. On the **Select databases for migration** page, select the checkbox for **Retail_Ontology**, verify it is selected, and then click **Next: Connect to target Azure SQL Database-Hyperscale >>.
 
 	![Step 4.png](../../media/image42.png)
 
@@ -71,10 +71,11 @@ In this exercise, you will create and configure a migration project, connect the
 ## What We Learned
 
 - How to create and configure a migration project in Azure Database Migration Service
-- How to connect source On-Prem SQL Server and targeted Azure SQL Database migration endpoints
+- How to connect source On-Prem SQL Server and targeted Azure SQL Database-Hyperscale migration endpoints
 - How to monitor migration progress and validate successful completion
 
 ## Next Exercise
 
-In the next exercise (Exercise 4), Mark will validate the migrated database and establish operational readiness by verifying data consistency and also validate all the schema objects, enabling monitoring and observability, and implementing backup, scaling, and disaster recovery capabilities for the Azure SQL Database environment.
+In the next exercise (Exercise 4), Mark will validate the migrated database and establish operational readiness by verifying data consistency and also validate all the schema objects, enabling monitoring and observability, and implementing backup, scaling, and disaster recovery capabilities for the Azure SQL Database-Hyperscale environment.
+
 

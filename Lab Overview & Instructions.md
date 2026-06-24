@@ -6,7 +6,7 @@ Using the **Zava Retail** scenario, participants experience how an organization 
 
 Zava has relied on an on-premises SQL Server environment for more than a decade to manage retail sales transactions. While newer business systems and analytics platforms have moved to the cloud, critical transaction data remains locked in legacy infrastructure, creating challenges for reporting, scalability, and innovation.
 
-To address these challenges, Zava adopts **Azure SQL Database** and **Azure Database Migration Service** to modernize its data estate and establish a unified foundation for future business intelligence initiatives.
+To address these challenges, Zava adopts Azure SQL Database-Hyperscale and **Azure Database Migration Service** to modernize its data estate and establish a unified foundation for future business intelligence initiatives.
 
 ---
 
@@ -43,7 +43,7 @@ Azure Database Migration Service bridges the gap between legacy infrastructure a
 
 # What We Are Building
 
-In this lab, participants modernize Zava's retail transaction platform by migrating an on-premises SQL Server database to Azure SQL Database.
+In this lab, participants modernize Zava's retail transaction platform by migrating an on-premises SQL Server database to Azure SQL Database-Hyperscale.
 
 The solution demonstrates how organizations can:
 
@@ -60,7 +60,7 @@ The solution demonstrates how organizations can:
 | Component | Responsibility |
 |------------|----------------|
 | SQL Server | Source system containing retail transaction data |
-| Azure SQL Database | Cloud destination for migrated workloads |
+| Azure SQL Database-Hyperscale | Cloud destination for migrated workloads |
 | Azure Database Migration Service | Migration orchestration and execution |
 | Self-Hosted Integration Runtime | Secure connectivity between environments |
 | SQL Server Management Studio (SSMS) | Database administration and validation |
@@ -79,7 +79,7 @@ You will see how:
 - Business-critical data can be moved securely and reliably
 - Cloud-based databases provide a foundation for future analytics and innovation
 
-Together, Azure SQL Database and Azure Database Migration Service provide a modern platform for transforming legacy data systems into scalable, cloud-based data solutions.
+Together, Azure SQL Database-Hyperscale and Azure Database Migration Service provide a modern platform for transforming legacy data systems into scalable, cloud-based data solutions.
 
 ---
 
@@ -89,7 +89,7 @@ Many organizations continue to operate on-premises SQL Server infrastructure tha
 
 The strategic response is **Azure Database Migration Service (DMS)**, Microsoft's fully managed migration platform that moves on-premises databases to Azure with minimal operational disruption. For organizations prioritizing cloud transformation, DMS is the layer of execution that translates migration strategy into tangible outcomes.
 
-While SQL Server stores the business data and Azure SQL Database provides the cloud destination, Azure Database Migration Service serves as the migration engine that connects the two environments.
+While SQL Server stores the business data and Azure SQL Database-Hyperscale provides the cloud destination, Azure Database Migration Service serves as the migration engine that connects the two environments.
 
 Azure Database Migration Service enables organizations to:
 
@@ -108,7 +108,7 @@ Azure Database Migration Service bridges the gap between legacy systems and mode
 | Stage | Purpose | Example |
 |---------|---------|---------|
 | Source | Existing business system | On-premises SQL Server |
-| Destination | Modern cloud database | Azure SQL Database |
+| Destination | Modern cloud database | Azure SQL Database-Hyperscale |
 | Migration | Secure movement of data | Azure Database Migration Service |
 | Validation | Verify migration success | Data and object validation |
 
@@ -126,4 +126,5 @@ Azure Database Migration Service helps organizations perform this transition eff
 - **Minimize Business Disruption** – Migrate databases with a structured and reliable process.
 - **Improve Scalability** – Transition from legacy infrastructure to modern cloud services.
 - **Establish a Modern Data Foundation** – Prepare data for analytics, reporting, and future AI initiatives.
+
 

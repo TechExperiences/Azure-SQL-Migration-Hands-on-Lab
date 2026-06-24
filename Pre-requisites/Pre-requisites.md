@@ -1,4 +1,4 @@
-# Prerequisites for On-Prem SQL Server to Azure SQL Database Migration – Hands-on Lab
+# Prerequisites for On-Prem SQL Server to Azure SQL Database-Hyperscale Migration – Hands-on Lab
  
 ## Azure Access Requirements
  
@@ -50,7 +50,7 @@ The following Azure resources are **pre-provisioned** and available before start
 | Resource                       | Purpose                   |
 | ------------------------------ | ------------------------- |
 | Azure SQL Logical Server       | Target SQL Server         |
-| Azure SQL Database (`salesdb`) | Target migration database |
+| Azure SQL Database-Hyperscale (`salesdb`) | Target migration database |
  
 ---
  
@@ -60,9 +60,9 @@ The following resource has already been provisioned:
  
 | Resource                               | Purpose                                                                               |
 | -------------------------------------- | ------------------------------------------------------------------------------------- |
-| Azure Database Migration Service (DMS) | Database migration service used to migrate SQL Server databases to Azure SQL Database |
+| Azure Database Migration Service (DMS) | Database migration service used to migrate SQL Server databases to Azure SQL Database-Hyperscale |
 
-> **Note:** The Azure Database Migration Service must be provisioned with a **Virtual Network (VNET)** and **Subnet** configuration to enable secure connectivity between the on-premises SQL Server environment and Azure SQL Database.
+> **Note:** The Azure Database Migration Service must be provisioned with a **Virtual Network (VNET)** and **Subnet** configuration to enable secure connectivity between the on-premises SQL Server environment and Azure SQL Database-Hyperscale.
 
 ### Networking Resources
 
@@ -100,8 +100,8 @@ The following networking resources are pre-provisioned to support DMS connectivi
  
 | Azure Resource                         | Purpose                                                    |
 | -------------------------------------- | ---------------------------------------------------------- |
-| Azure SQL Database                     | Migration target                                           |
-| Azure SQL Logical Server               | Hosts Azure SQL Database                                   |
+| Azure SQL Database-Hyperscale                     | Migration target                                           |
+| Azure SQL Logical Server               | Hosts Azure SQL Database-Hyperscale                                   |
 | Azure Database Migration Service (DMS) | Performs offline database migration                        |
 | Virtual Network (VNET)                 | Provides network isolation and secure connectivity for DMS |
 | Subnet                                 | Dedicated subnet for DMS within the VNET                   |
@@ -122,8 +122,9 @@ Before beginning the lab, verify the following.
 | SQL Server and SSMS are installed on the workstation | ✅      |
 | On-premises database has been set up using .bat file | ✅      |
 | Azure SQL Logical Server is provisioned             | ✅      |
-| Azure SQL Database (`RetailsDB`) is available         | ✅      |
+| Azure SQL Database-Hyperscale (`RetailsDB`) is available         | ✅      |
 | Azure Database Migration Service (DMS) is available | ✅      |
 | VNET and Subnet configured for DMS                  | ✅      |
 | Required credentials have been provided             | ✅      |
 | Self-Hosted Integration Runtime                     | ✅      |
+

@@ -1,6 +1,6 @@
 # Exercise 2: Configure Azure Database Migration Service
 
-The source and target database are now ready for migration. Before moving schema objects and data, a secure connection must be established between the on-premises SQL Server environment and Azure SQL Database. Azure Database Migration Service (DMS) provides the migration infrastructure required to enable this process.
+The source and target database are now ready for migration. Before moving schema objects and data, a secure connection must be established between the on-premises SQL Server environment and Azure SQL Database-Hyperscale. Azure Database Migration Service (DMS) provides the migration infrastructure required to enable this process.
 
 In this exercise, you will review Azure Database Migration Service, install and register the Self-Hosted Integration Runtime, and validate connectivity via IR Authentication Key between the source and target systems. These steps ensure that the migration infrastructure is in place and ready to support the upcoming migration process.
 
@@ -8,7 +8,7 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
 - Azure Database Migration Service reviewed and validated
 - Self-Hosted Integration Runtime successfully installed and registered
-- Connectivity established between on-premises SQL Server and Azure SQL Database
+- Connectivity established between on-premises SQL Server and Azure SQL Database-Hyperscale
 - Migration infrastructure configured and operational
 - Foundation established for executing the database migration
 
@@ -41,7 +41,7 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
     ![Step 5.png](../../media/image30.png)
 
-6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select **Azure SQL Database**. 
+6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select Azure SQL Database-Hyperscale. 
 
     ![Step 6.png](../../media/image31.png)
 
@@ -88,5 +88,6 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
 ## Next Exercise
 
-In the next exercise (Exercise 3), Mark will use the migration infrastructure configured here to migrate Zava's retail transaction database to Azure SQL Database. He will validate schema compatibility, transfer data, and confirm that the migrated environment is ready to support modern analytics and reporting workloads.
+In the next exercise (Exercise 3), Mark will use the migration infrastructure configured here to migrate Zava's retail transaction database to Azure SQL Database-Hyperscale. He will validate schema compatibility, transfer data, and confirm that the migrated environment is ready to support modern analytics and reporting workloads.
+
 

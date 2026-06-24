@@ -55,13 +55,13 @@ param sqlServerVersion string = '12.0'
 ])
 param sqlPublicNetworkAccess string = 'Enabled'
 
-@description('Azure SQL Database SKU name.')
+@description('Azure SQL Database-**Hyperscale** SKU name.')
 param sqlDatabaseSkuName string = 'Basic'
 
-@description('Azure SQL Database SKU tier.')
+@description('Azure SQL Database-**Hyperscale** SKU tier.')
 param sqlDatabaseSkuTier string = 'Basic'
 
-@description('Azure SQL Database SKU capacity.')
+@description('Azure SQL Database-**Hyperscale** SKU capacity.')
 @minValue(1)
 param sqlDatabaseSkuCapacity int = 5
 
@@ -74,7 +74,7 @@ var rgToken = take(toLower(replace(resourceGroup().name, '-', '')), rgTokenLengt
 @description('Azure SQL Server name.')
 param sqlServerName string = ''
 
-@description('Azure SQL Database name.')
+@description('Azure SQL Database-**Hyperscale** name.')
 param sqlDatabaseName string = ''
 
 @description('Azure Database Migration Service name.')
@@ -162,4 +162,5 @@ output dmsServiceId string = deployDms ? dmsService.id : ''
 output dmsLocation string = dmsLocation
 output dmsVnetName string = (deployDms && deployDmsNetwork) ? dmsVnet.name : ''
 output dmsSubnetId string = (deployDms && deployDmsNetwork) ? dmsSubnet.id : ''
+
 
