@@ -49,6 +49,78 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 	![Step 6.png](../../media/image54.png)
 
+### Task 4.4: (Optional) Validate Source vs Target Metrics via GitHub Copilot in VS Code
+
+1. Click on the **Windows** icon in the taskbar, type **Visual Studio Code - Insiders** in Search, and click the **Visual Studio Code - Insiders** app from **Best match**.
+
+	![Step 7.png](../../media/image57.png)
+
+2. In VS Code, click the **SQL Server** extension icon in the left activity bar, then click **+ Add Connection**. In the **Connection Dialog**, enter **localhost** as the server name, keep **Trust server certificate** checked, open **Authentication type**, and select **Windows Authentication**.
+
+	![Step 8.png](../../media/image58.png)
+
+3. Click **Test connection**. After a few seconds, verify that a green **tick** appears, then click **Connect**.
+
+	![Step 9.png](../../media/image59.png)
+
+
+4. In the **SQL SERVER** panel, expand the connected **localhost** server, expand **Databases**, and verify that **Retail_Ontology** is visible.
+
+	![Step 10.png](../../media/image60.png)
+
+5. Click **+ Add Connection** to create another connection. In the **Connection Dialog**, enter the Azure SQL server name, keep **Trust server certificate** checked, set **Authentication type** to **SQL Login**, enter the SQL username and password, click **Test connection**, wait a few seconds for the green **tick**, and then click **Connect**.
+
+	![Step 11.png](../../media/image61.png)
+
+6. In the **SQL SERVER** panel, expand the new Azure SQL connection, expand **Databases**, and verify that **Retail_DB-Hyperscale** is visible. Expand **Retail_DB-Hyperscale** to view all migrated database objects.
+
+	![Step 12.png](../../media/image62.png)
+
+7. Click the **Copilot** icon in the VS Code chat panel to activate GitHub Copilot. Verify **Auto** is selected, then click the **Settings** gear icon to open model configuration options.
+
+	![Step 13.png](../../media/image63.png)
+
+8. Click **+ Add Models** to expand the available model providers, and select **Custom Endpoint** to configure a custom AI model endpoint.
+
+	![Step 14.png](../../media/image64.png)
+
+9. In the **Group Name** field, enter a name for your custom endpoint group and press **Enter** to confirm.
+
+	![Step 15.png](../../media/image65.png)
+
+10. In the **Custom Endpoint: API Key** field, enter your API key for the models and press **Enter** to confirm.
+
+	![Step 16.png](../../media/image66.png)
+
+11. In the **Custom Endpoint: API Type** dropdown, select **Chat Completions** as the default request/response format for models in this group.
+
+	![Step 17.png](../../media/image67.png)
+
+12. VS Code opens the **chatLanguageModels.json** configuration file. In this file, copy and paste these values:
+
+    - **Model ID** - Paste in the `"id"` field:
+    ```text
+    gpt-4.1
+    ```
+
+    - **Model Names** - Paste in both `"name"` fields:
+    ```text
+    Azure GPT-4.1
+    ```
+
+    - **Model URL** - Paste in the `"url"` field:
+    ```text
+    https://aihub-rgworkiglab-260527163829qkor.services.ai.azure.com/openai/v1/chat/completions
+    ```
+
+	![Step 18.png](../../media/image68.png)
+
+
+
+
+13. Save the changes by pressing **Ctrl + S**, then click the **X** button to close the configuration file.
+
+	![Step 19.png](../../media/image69.png)
 
 ## What We Learned
 
