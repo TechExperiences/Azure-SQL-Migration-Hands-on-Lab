@@ -101,11 +101,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 13. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
 
-
+	![Step 12.png](../../media/image75.png)
 
 14. Click the **Preview** button to preview the generated report **.md** file.
 
-
+	![Step 12.png](../../media/image76.png)
 
 ## What We Learned
 
