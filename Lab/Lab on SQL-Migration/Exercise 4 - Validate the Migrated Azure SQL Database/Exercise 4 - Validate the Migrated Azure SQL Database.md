@@ -97,7 +97,8 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 12. VS Code will automatically come back to the screen. Paste the given prompt in the **Copilot chat** right panel and press **Enter**.
 
-```sql
+
+```text
 # Role
 You are an expert Database Migration Validation Engineer specializing in post-migration validation for enterprise SQL Server to Azure SQL Database migrations.
 
@@ -150,7 +151,7 @@ Execute queries on both databases and compare the following aspects:
 
 Generate a **single, complete markdown file** named `Comparison_Report.md` with the following structure:
 
-```markdown
+
 # Database Migration Validation Report
 
 ## Executive Summary
@@ -231,7 +232,7 @@ Generate a **single, complete markdown file** named `Comparison_Report.md` with 
 
 ## Validation Conclusion
 [Final summary statement: database migration validated successfully, or issues requiring attention]
-```
+
 
 # Instructions for Execution
 
@@ -256,7 +257,7 @@ Generate a **single, complete markdown file** named `Comparison_Report.md` with 
 **Begin validation and generate the complete `Comparison_Report.md` file now.**
 ```
 
-	![Step 12.png](../../media/image74.png)
+![Step 12.png](../../media/image74.png)
 
 13. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
 
