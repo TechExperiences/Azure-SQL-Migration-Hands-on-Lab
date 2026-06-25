@@ -97,7 +97,6 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 12. VS Code will automatically come back to the screen. Paste the given prompt in the **Copilot chat** right panel and press **Enter**.
 
-
 ```text
 # Role
 You are an expert Database Migration Validation Engineer specializing in post-migration validation for enterprise SQL Server to Azure SQL Database migrations.
