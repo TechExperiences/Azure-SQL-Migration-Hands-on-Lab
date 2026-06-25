@@ -80,47 +80,7 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 	![Step 13.png](../../media/image63.png)
 
-8. Click **+ Add Models** to expand the available model providers, and select **Custom Endpoint** to configure a custom AI model endpoint.
 
-	![Step 14.png](../../media/image64.png)
-
-9. In the **Group Name** field, enter a name for your custom endpoint group and press **Enter** to confirm.
-
-	![Step 15.png](../../media/image65.png)
-
-10. In the **Custom Endpoint: API Key** field, enter your API key for the models and press **Enter** to confirm.
-
-	![Step 16.png](../../media/image66.png)
-
-11. In the **Custom Endpoint: API Type** dropdown, select **Chat Completions** as the default request/response format for models in this group.
-
-	![Step 17.png](../../media/image67.png)
-
-12. VS Code opens the **chatLanguageModels.json** configuration file. In this file, copy and paste these values:
-
-    - **Model ID** - Paste in the `"id"` field:
-    ```text
-    gpt-4.1
-    ```
-
-    - **Model Names** - Paste in both `"name"` fields:
-    ```text
-    Azure GPT-4.1
-    ```
-
-    - **Model URL** - Paste in the `"url"` field:
-    ```text
-    https://aihub-rgworkiglab-260527163829qkor.services.ai.azure.com/openai/v1/chat/completions
-    ```
-
-	![Step 18.png](../../media/image68.png)
-
-
-
-
-13. Save the changes by pressing **Ctrl + S**, then click the **X** button to close the configuration file.
-
-	![Step 19.png](../../media/image69.png)
 
 ## What We Learned
 

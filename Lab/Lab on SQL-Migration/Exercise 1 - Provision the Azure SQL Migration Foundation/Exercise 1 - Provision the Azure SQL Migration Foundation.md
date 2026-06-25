@@ -64,25 +64,6 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 7.png](../../media/image7.png)
 
-8. In the **Object Explorer**, right-click on **localhost (SQL Server 17.0.1000.7...)** and click on **New Query**.
-
-    ![Step 8.png](../../media/image8.png)
-
-9. A new query window will open. Paste the following SQL query into the query editor:
-
-    ```sql
-    CREATE LOGIN pocadmin WITH PASSWORD = 'YourPassword@123';
-    ALTER SERVER ROLE sysadmin ADD MEMBER pocadmin;
-    ```
-
-    Then click **Execute** on the toolbar.
-
-    ![Step 9.png](../../media/image9.png)
-
-10. Validate that the message **"Commands completed successfully"** appears in the **Messages** tab at the bottom of the query window, confirming the query ran successfully.
-
-    ![Step 10.png](../../media/image10.png)
-
 
 
 ### Task 1.2: Access the Provided Azure SQL Server and Database​
