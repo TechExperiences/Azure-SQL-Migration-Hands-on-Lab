@@ -78,13 +78,32 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 7. Click on the **GitHub Copilot chat** icon on the top right of VS Code, then click on the **GitHub Copilot** icon at the right bottom to log in using your GitHub account credentials.
 
+	![Step 12.png](../../media/image70.png)
+
+
 8. A popup will be shown. Click on the **Continue with GitHub** button to proceed with authentication.
+
+	![Step 12.png](../../media/image71.png)
 
 9. Sign in with your **GitHub account** and **password** to authenticate VS Code with GitHub Copilot.
 
 10. A popup to approve VS Code link with GitHub will appear. Click on the **Continue** button to complete the authentication process.
 
-11. Click the **Copilot** icon in the VS Code chat panel to activate GitHub Copilot. Verify **Auto** is selected, then click the **Settings** gear icon to open model configuration options.
+	![Step 12.png](../../media/image72.png)
+
+11. A new popup will appear. Click on the **Authorize Visual-Studio-Code** button to authorize the connection.
+
+	![Step 12.png](../../media/image73.png)
+
+12. VS Code will automatically come back to the screen. Paste the given prompt in the **Copilot chat** right panel and press **Enter**.
+
+	![Step 12.png](../../media/image74.png)
+
+13. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
+
+
+
+14. Click the **Preview** button to preview the generated report **.md** file.
 
 
 
