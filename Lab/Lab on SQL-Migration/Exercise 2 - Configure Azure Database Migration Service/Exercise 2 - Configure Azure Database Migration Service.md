@@ -41,7 +41,7 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
     ![Step 5.png](../../media/image30.png)
 
-6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select Azure SQL Database-Hyperscale. 
+6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select Azure SQL Database. 
 
     ![Step 6.png](../../media/image31.png)
 
