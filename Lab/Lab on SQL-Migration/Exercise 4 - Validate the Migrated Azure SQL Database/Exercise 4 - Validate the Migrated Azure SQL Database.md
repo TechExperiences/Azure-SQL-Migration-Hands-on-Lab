@@ -76,9 +76,15 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 	![Step 12.png](../../media/image62.png)
 
-7. Click the **Copilot** icon in the VS Code chat panel to activate GitHub Copilot. Verify **Auto** is selected, then click the **Settings** gear icon to open model configuration options.
+7. Click on the **GitHub Copilot chat** icon on the top right of VS Code, then click on the **GitHub Copilot** icon at the right bottom to log in using your GitHub account credentials.
 
-	![Step 13.png](../../media/image63.png)
+8. A popup will be shown. Click on the **Continue with GitHub** button to proceed with authentication.
+
+9. Sign in with your **GitHub account** and **password** to authenticate VS Code with GitHub Copilot.
+
+10. A popup to approve VS Code link with GitHub will appear. Click on the **Continue** button to complete the authentication process.
+
+11. Click the **Copilot** icon in the VS Code chat panel to activate GitHub Copilot. Verify **Auto** is selected, then click the **Settings** gear icon to open model configuration options.
 
 
 
