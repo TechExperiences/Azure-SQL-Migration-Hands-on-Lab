@@ -28,11 +28,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 ### Task 4.2: Verify Migrated Database Objects​
 
-3. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
+1. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
 
 	![Step 3.png](../../media/image51.png)
 
-4. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
+2. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
 
 	![Step 4.png](../../media/image52.png)
 
@@ -41,11 +41,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 
 
-5. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
+1. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
 
 	![Step 5.png](../../media/image53.png)
 
-6. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
+2. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
 
 	![Step 6.png](../../media/image54.png)
 
