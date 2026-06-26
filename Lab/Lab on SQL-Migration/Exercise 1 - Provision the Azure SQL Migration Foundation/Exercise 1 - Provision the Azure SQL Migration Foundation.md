@@ -86,7 +86,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
     Resource Groups
     ```
 
-    ![Step 2.png](../../media/image20.png)
+     ![Step 2.png](../../media/image20.png)
 
 3. In the Resource Groups list, click on **rg-workIQ-Lab**.
 
