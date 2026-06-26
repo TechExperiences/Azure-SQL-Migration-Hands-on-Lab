@@ -140,9 +140,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
         ```text
         (Refer to your C:\SQL_Credentials.txt file for the password)
         ```
-
-
-    ![Step 10.png](../../media/image27.png)
+        ![Step 10.png](../../media/image27.png)
 
 3. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
 
