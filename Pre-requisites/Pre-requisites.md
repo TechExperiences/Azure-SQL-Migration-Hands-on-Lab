@@ -19,7 +19,19 @@ The following software must be installed and configured on the participant's loc
 | ----------------------------------------- | -------------------------------------------------------- | ------------- |
 | SQL Server 2025 (Enterprise Developer edition) | Hosts the on-prem source database to be migrated         | [Download SQL Server 2025](https://go.microsoft.com/fwlink/?linkid=2344711&clcid=0x4009&culture=en-in&country=in) |
 | SQL Server Management Studio (SSMS)       | Connects to and manages the source SQL Server instance   | [Download SSMS](https://aka.ms/ssms/22/release/vs_SSMS.exe) |
+| Visual Studio Code - Insiders             | Development environment for database migration and AI-assisted coding | [Download VS Code Insiders](https://code.visualstudio.com/insiders/) |
 | Self-Hosted Integration Runtime           | Securely connects on-premises SQL Server to Azure DMS    | [Download Microsoft Integration Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=39717) |
+
+### Required VS Code Extensions
+
+The following extensions must be installed in Visual Studio Code - Insiders:
+
+| Extension                     | Purpose                                                     | Installation |
+| ----------------------------- | ----------------------------------------------------------- | ------------ |
+| GitHub Copilot Chat           | Provides AI-powered assistance for database migration tasks | Install from VS Code Extensions Marketplace |
+| SQL Server (mssql)            | Connects to SQL Server databases and executes queries       | Install from VS Code Extensions Marketplace |
+
+> **Note:** To install extensions, open VS Code Insiders, press `Ctrl+Shift+X` to open the Extensions view, search for each extension by name, and click **Install**.
  
 ---
 
@@ -83,12 +95,6 @@ The following networking resources are pre-provisioned to support DMS connectivi
 * SQL Authentication Username
 * SQL Authentication Password
 
-### GitHub Account
-
-* A GitHub account with **GitHub Copilot Enterprise** enabled
-
-    > **Note:** GitHub Copilot Enterprise is required to access AI-powered features in VS Code during the validation and comparison tasks.
-
 ### Self-Hosted Integration Runtime
 
 * IR Authentication Key (obtained from Azure Database Migration Service)
@@ -122,15 +128,15 @@ The following networking resources are pre-provisioned to support DMS connectivi
  
 Before beginning the lab, verify the following.
  
-| Item                                                | Status |
-| --------------------------------------------------- | ------ |
-| Azure subscription is accessible                    | ✅      |
-| SQL Server and SSMS are installed on the workstation | ✅      |
-| On-premises database has been set up using .bat file | ✅      |
-| Azure SQL Logical Server is provisioned             | ✅      |
-| Azure SQL Database-Hyperscale (`RetailsDB`) is available         | ✅      |
-| Azure Database Migration Service (DMS) is available | ✅      |
-| VNET and Subnet configured for DMS                  | ✅      |
-| GitHub account with GitHub Copilot Enterprise enabled | ✅      |
-| Required credentials have been provided             | ✅      |
-| Self-Hosted Integration Runtime                     | ✅      |
+| Item                                                         | Status |
+| ------------------------------------------------------------ | ------ |
+| Azure subscription is accessible                             | ✅      |
+| SQL Server and SSMS are installed on the workstation          | ✅      |
+| VS Code Insiders with GitHub Copilot Chat and SQL Server extensions installed | ✅      |
+| On-premises database has been set up using .bat file          | ✅      |
+| Azure SQL Logical Server is provisioned                      | ✅      |
+| Azure SQL Database-Hyperscale (`RetailsDB`) is available     | ✅      |
+| Azure Database Migration Service (DMS) is available          | ✅      |
+| VNET and Subnet configured for DMS                           | ✅      |
+| Required credentials have been provided                      | ✅      |
+| Self-Hosted Integration Runtime installed and configured     | ✅      |
