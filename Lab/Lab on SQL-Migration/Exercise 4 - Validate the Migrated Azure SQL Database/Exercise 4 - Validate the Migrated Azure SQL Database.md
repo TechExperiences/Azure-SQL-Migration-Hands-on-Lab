@@ -95,8 +95,13 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
     ![Step 12.png](../../media/image73.png)
 
-12. VS Code will automatically come back to the screen. Paste the given prompt in the **Copilot chat** right panel and press **Enter**.
+12. VS Code will automatically come back to the screen. Before pasting the prompt, **update the Target Database details** in the prompt below with your actual Azure SQL server name and database name from envirnment. Then paste the updated prompt in the **Copilot chat** right panel and press **Enter**.
 
+    > **Note:** Replace the following values with your actual Azure SQL Database details:
+    > - **Server:** Update `sqlserver-inventory.database.windows.net` with your Azure SQL server name (e.g., `sql-rgworkiqlab-f1-06151713336.database.windows.net`)
+    > - **Database:** Update `Retail_DB-Hyperscale` with your Azure SQL database name (e.g., `sqldb-rgworkiqlab-f1-06151713336`)
+    
+    **Prompt**
     ```text
     # Role
     You are an expert Database Migration Validation Engineer specializing in post-migration validation for enterprise SQL Server to Azure SQL Database migrations.
