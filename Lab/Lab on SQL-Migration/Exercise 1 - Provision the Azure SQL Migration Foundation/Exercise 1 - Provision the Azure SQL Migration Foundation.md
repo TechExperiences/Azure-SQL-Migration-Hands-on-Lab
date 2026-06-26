@@ -134,7 +134,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
     - **Password**: 
 
         ```text
-        (Refer to your environment details for the password)
+        (Refer to your C:\SQL_Credentials.txt file for the password)
         ```
 
 
