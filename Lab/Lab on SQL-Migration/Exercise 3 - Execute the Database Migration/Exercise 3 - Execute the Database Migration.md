@@ -33,6 +33,11 @@ In this exercise, you will create and configure a migration project, connect the
 
 ### Task 3.2: Configure the Target Database in Migration Wizard
 
+5. On the **Connect to target Azure SQL Database-Hyperscale** page, enter the password (refer to your environment details for the password) and then click **Next: Map source and target databases >>**.
+
+	![Step 6.png](../../media/image43.png)
+
+
 6. On the **Map source and target databases** page, click the **Target database** dropdown and select **sqldb-rgworkiqlab-f1-06151713336**, verify that the source database **Retail_Ontology** is mapped to the target database, and then click **Next: Select database tables to migrate >>**.
 
 	![Step 6.png](../../media/image44.png)

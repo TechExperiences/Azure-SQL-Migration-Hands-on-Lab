@@ -113,31 +113,36 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 7.png](../../media/image25.png)
 
+8. Now click on the **cross icon** to remove the network searched text from the search bar.
+
+    ![Step 8.png](../../media/image77.png)
+
 ### Task 1.4: Test Azure SQL Database-Hyperscale Connection and Verify Empty State
 
-8. In the left panel, expand **Settings** and click on **SQL databases**. Then click on **sqldb-rgworkiqlab-f1-06151713336** from the database list.
+9. In the left panel, expand **Settings** and click on **SQL databases**. Then click on **sqldb-rgworkiqlab-f1-06151713336** from the database list.
 
-    ![Step 8.png](../../media/image26.png)
+    ![Step 9.png](../../media/image26.png)
 
-9. In the left panel, click on **Query editor (preview)**. In the Query editor login page, select **SQL Server authentication**, enter the following credentials, and click **OK**.
+10. In the left panel, click on **Query editor (preview)**. In the Query editor login page, select **SQL Server authentication**, enter the following credentials (you can find these credentials in your lab environment details), and click **OK**.
 
     - **Login**:
 
         ```text
-       
+       sqladmin
         ```
 
-    - **Password**:
+    - **Password**: 
 
         ```text
-        
+        (Refer to your environment details for the password)
         ```
 
-    ![Step 9.png](../../media/image27.png)
 
-10. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
+    ![Step 10.png](../../media/image27.png)
 
-    ![Step 10.png](../../media/image28.png)
+11. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
+
+    ![Step 11.png](../../media/image28.png)
 
 
 
@@ -162,4 +167,3 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 ## Next Exercise
 
 In the next exercise (Exercise 2), Mark will configure the Azure Database Migration Service, install and register the Self-Hosted Integration Runtime, and establish secure connectivity between the on-premises SQL Server environment and Azure SQL Database-Hyperscale. These steps will ensure that the migration infrastructure is in place and ready to support the upcoming migration process.
-
