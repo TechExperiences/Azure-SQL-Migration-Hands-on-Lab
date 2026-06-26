@@ -23,7 +23,7 @@ In this exercise, you will create and configure a migration project, connect the
 
 	![Step 2.png](../../media/image40.png)
 
-3. On the **Connect to source SQL Server** page, enter **localhost** for **Source server name**, set **Authentication type** to **SQL Authentication** from dropdown, enter **sqladmin** as **User name**, enter the SQL admin password in **Password**, ensure **Encrypt connection** and **Trust server certificate** are selected, and then click **Next: Select databases for migration >>**.
+3. On the **Connect to source SQL Server** page, enter **localhost** for **Source server name**, set **Authentication type** to **SQL Authentication** from dropdown, enter **sqladmin** as **User name**, enter the SQL admin password as <inject key="SQL Admin Password" enableCopy="false"/> in **Password**, ensure **Encrypt connection** and **Trust server certificate** are selected, and then click **Next: Select databases for migration >>**.
 
 	![Step 3.png](../../media/image41.png)
 
