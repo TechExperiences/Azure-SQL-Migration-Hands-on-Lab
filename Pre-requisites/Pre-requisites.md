@@ -95,6 +95,12 @@ The following networking resources are pre-provisioned to support DMS connectivi
 * SQL Authentication Username
 * SQL Authentication Password
 
+### GitHub Account
+
+* A GitHub account with **GitHub Copilot Enterprise** enabled
+
+    > **Note:** GitHub Copilot Enterprise is required to access AI-powered features in VS Code during the validation and comparison tasks.
+
 ### Self-Hosted Integration Runtime
 
 * IR Authentication Key (obtained from Azure Database Migration Service)
@@ -138,5 +144,6 @@ Before beginning the lab, verify the following.
 | Azure SQL Database-Hyperscale (`RetailsDB`) is available     | ✅      |
 | Azure Database Migration Service (DMS) is available          | ✅      |
 | VNET and Subnet configured for DMS                           | ✅      |
+| GitHub account with GitHub Copilot Enterprise enabled | ✅      |
 | Required credentials have been provided                      | ✅      |
 | Self-Hosted Integration Runtime installed and configured     | ✅      |
