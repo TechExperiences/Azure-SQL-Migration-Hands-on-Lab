@@ -19,17 +19,25 @@ In this exercise, you will create and configure a migration project, connect the
 
 	![Step 1.png](../../media/image39.png)
 
+	> **Note:** It takes some time to move to the next step.
+
 2. Under **Select SQL Server instance details**, choose **West US** for **Location**, enter **dms-sql-server-instance** for **SQL Server Instance Name**, and then click **Next: Connect to source SQL Server >>**.
 
 	![Step 2.png](../../media/image40.png)
+
+	> **Note:** It takes some time to move to the next step.
 
 3. On the **Connect to source SQL Server** page, enter **localhost** for **Source server name**, set **Authentication type** to **SQL Authentication** from dropdown, enter **sqladmin** as **User name**, enter the SQL admin password as **<inject key="SQL Admin Password" enableCopy="false"/>** in **Password**, ensure **Encrypt connection** and **Trust server certificate** are selected, and then click **Next: Select databases for migration >>**.
 
 	![Step 3.png](../../media/image41.png)
 
+	> **Note:** It takes some time to move to the next step.
+
 4. On the **Select databases for migration** page, select the checkbox for **Retail_Ontology**, verify it is selected, and then click **Next: Connect to target Azure SQL Database-Hyperscale >>.
 
 	![Step 4.png](../../media/image42.png)
+
+	> **Note:** It takes some time to move to the next step.
 
 ### Task 3.2: Configure the Target Database in Migration Wizard
 
@@ -37,10 +45,14 @@ In this exercise, you will create and configure a migration project, connect the
 
 	![Step 6.png](../../media/image43.png)
 
+	> **Note:** It takes some time to move to the next step.
+
 
 6. On the **Map source and target databases** page, click the **Target database** dropdown and select **sqldb-rgworkiqlab-f1-06151713336**, verify that the source database **Retail_Ontology** is mapped to the target database, and then click **Next: Select database tables to migrate >>**.
 
 	![Step 6.png](../../media/image44.png)
+
+	> **Note:** It takes some time to move to the next step.
 
 ### Task 3.3: Select the Source Database and Run the Migration
 
@@ -48,29 +60,29 @@ In this exercise, you will create and configure a migration project, connect the
 
 	![Step 7.png](../../media/image45.png)
 
+	> **Note:** It takes some time to move to the next step.
+
 8. On the **Database migration summary** page, review the migration configuration (SQL Server Instance, Source databases, Azure SQL target, and Migration mode), verify all details are correct, and then click **Start migration**.
 
 	![Step 8.png](../../media/image46.png)
 
-9. The **Migrations** page will display with the migration status initially showing **Creating**. The status will change to **In progress** as the migration begins. Wait until the migration completes successfully.
+	> **Note:** It takes some time to move to the next step.
 
-	![Step 9.png](../../media/image47.png)
+9. The **Migrations** page will display with the migration status initially showing **Creating**. The status will change to **In progress** as the migration begins. You can click on the **Source name** `localhost` link to view detailed migration running status.
 
-10. Verify that the migration status displays **Succeeded** in the Migrations table.
+	![Step 9.png](../../media/image80.png)
 
-	![Step 10.png](../../media/image48.png)
+10. The migration process may take approximately **8-10 minutes** to complete. Keep refreshing the page to monitor the progress until the migration completes successfully.
 
+	![Step 9.png](../../media/image81.png)
 
+	> **Note:** It takes some time to complete migration.
 
 ### Task 3.4: Review the Migration Results
 
-11. Click on the **localhost** link under **Source name** in the Migrations table to review the migration details.
+11. On the **Retail_Ontology** migration details page, Once migration completed review and verify the following: **Migration status** shows **Succeeded**, **Schema migration status** shows **Completed** with all the objects collected, **Script generation** is **100%**, **Script deployment** is **100%** with 0 deployment failures, and all tables in the list show **Succeeded** status. Then click **X** to close the details page.
 
-	![Step 11.png](../../media/image55.png)
-
-12. On the **Retail_Ontology** migration details page, review and verify the following: **Migration status** shows **Succeeded**, **Schema migration status** shows **Completed** with all the objects collected, **Script generation** is **100%**, **Script deployment** is **100%** with 0 deployment failures, and all tables in the list show **Succeeded** status. Then click **X** to close the details page.
-
-	![Step 12.png](../../media/image56.png)
+	![Step 13.png](../../media/image56.png)
 
 
 ## What We Learned
