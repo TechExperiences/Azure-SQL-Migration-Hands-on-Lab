@@ -129,28 +129,23 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
 2. In the left panel, click on **Query editor (preview)**. In the Query editor login page, select **SQL Server authentication**, enter the following credentials (you can find these credentials in your lab environment details), and click **OK**.
 
-    - **Login**:
+   - **Login:**
 
-        ```text
-       sqladmin
-        ```
+     ```text
+     sqladmin
+     ```
 
-    - **Password**: 
+   - **Password:**
 
-        ```text
-        (Refer to your C:\SQL_Credentials.txt file for the password)
-        ```
-        ![Step 10.png](../../media/image27.png)
+     ```text
+     (Refer to your `C:\SQL_Credentials.txt` file for the password)
+     ```
+
+   ![Step 10.png](../../media/image27.png)
 
 3. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
 
     ![Step 11.png](../../media/image28.png)
-
-
-
-
-
-
 
 
 
