@@ -504,6 +504,8 @@ function Save-SqlCredentialsToFile {
     param(
         [Parameter(Mandatory = $true)] [string]$SqlAdminLogin,
         [Parameter(Mandatory = $true)] [string]$SqlAdminPassword,
+        [Parameter(Mandatory = $true)] [string]$SqlServerName,
+        [Parameter(Mandatory = $true)] [string]$SqlDatabaseName,
         [string]$CredentialsDir,
         [string]$Suffix = ""
     )
@@ -527,6 +529,8 @@ function Save-SqlCredentialsToFile {
 
     $lines = @(
         "CreatedOnUtc: $((Get-Date).ToUniversalTime().ToString($CredentialsCreatedOnUtcFormat))",
+        "SqlServerName: $SqlServerName",
+        "SqlDatabaseName: $SqlDatabaseName",
         "SqlAdminLogin: $SqlAdminLogin",
         "SqlAdminPassword: $SqlAdminPassword"
     )
@@ -1009,12 +1013,7 @@ $resolvedDmsRegionCandidates = Get-PreferredRegions -Candidates $DmsRegionCandid
 
 $pwdChars = $SqlPasswordCharset
 $sqlAdminPassword = -join ((1..$SqlAdminPasswordLength) | ForEach-Object { $pwdChars[(Get-Random -Maximum $pwdChars.Length)] })
-
-$credentialFiles = Save-SqlCredentialsToFile `
-    -SqlAdminLogin $SqlAdminLogin `
-    -SqlAdminPassword $sqlAdminPassword `
-    -CredentialsDir $SqlCredentialsDir `
-    -Suffix $effectiveSuffix
+$credentialFiles = ""
 
 $commonParams = @(
     "suffix=$effectiveSuffix",
@@ -1070,6 +1069,14 @@ $sqlResult = Deploy-ResourceWithPromptedFallback `
 $sqlServerName = $sqlResult.resourceName
 $sqlDatabaseName = Get-SqlDatabaseName -RgToken $rgToken -SuffixValue $effectiveSuffix -Attempt $sqlResult.attempt
 $sqlRegion = $sqlResult.region
+
+$credentialFiles = Save-SqlCredentialsToFile `
+    -SqlAdminLogin $SqlAdminLogin `
+    -SqlAdminPassword $sqlAdminPassword `
+    -SqlServerName $sqlServerName `
+    -SqlDatabaseName $sqlDatabaseName `
+    -CredentialsDir $SqlCredentialsDir `
+    -Suffix $effectiveSuffix
 
 Ensure-SqlQueryEditorAccess `
     -ResourceGroup $ResourceGroupName `
