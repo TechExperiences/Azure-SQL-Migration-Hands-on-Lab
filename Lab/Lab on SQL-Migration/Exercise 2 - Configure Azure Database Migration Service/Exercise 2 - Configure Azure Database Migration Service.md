@@ -75,6 +75,9 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
     > **Note:** It may take a few moments for the status to update to "Connected." During this time, it may briefly display "Inactive."
 
+    ![Step 12.png](../../media/image83.png)
+
+
 2. Go back to the Azure Portal. In the **Configure integration runtime** panel on the right, click **Refresh**. The error message indicating "Integration Runtime not registered" will disappear, confirming the Self-Hosted Integration Runtime is successfully configured. Then click **Select** at the bottom of the page.
 
     ![Step 13.png](../../media/image38.png)

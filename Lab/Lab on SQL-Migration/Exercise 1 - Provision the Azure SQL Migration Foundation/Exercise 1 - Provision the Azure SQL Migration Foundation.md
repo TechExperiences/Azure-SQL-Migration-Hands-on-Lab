@@ -92,7 +92,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 3.png](../../media/image21.png)
 
-4. In the resource group, click on **sql-rgworkiqlab-f1-06151713336** (Type: SQL server) from the Resources list.
+4. In the resource group, click on **sql-rgworkiqlab-f1-06151713336 (Type: SQL server)** from the Resources list.
 
     ![Step 4.png](../../media/image22.png)
 

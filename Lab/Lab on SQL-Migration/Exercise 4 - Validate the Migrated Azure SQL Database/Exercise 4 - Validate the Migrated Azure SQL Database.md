@@ -28,11 +28,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 ### Task 4.2: Verify Migrated Database Objects​
 
-1. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
+3. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
 
 	![Step 3.png](../../media/image51.png)
 
-2. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
+4. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
 
 	![Step 4.png](../../media/image52.png)
 
@@ -41,11 +41,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 
 
-1. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
+5. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
 
 	![Step 5.png](../../media/image53.png)
 
-2. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
+6. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
 
 	![Step 6.png](../../media/image54.png)
 
@@ -80,28 +80,30 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 	![Step 12.png](../../media/image70.png)
 
+8. A pop-up screen will be shown. Click on the **Use AI Features** button.
 
-8. A popup will be shown. Click on the **Continue with GitHub** button to proceed with authentication.
+	![Step 8.png](../../media/image84.png)
 
-	![Step 12.png](../../media/image71.png)
+9. A popup will be shown. Click on the **Continue with GitHub** button to proceed with authentication.
 
-9. Sign in with your **GitHub account** and **password** to authenticate VS Code with GitHub Copilot.
+	![Step 9.png](../../media/image71.png)
 
-10. A popup to approve VS Code link with GitHub will appear. Click on the **Continue** button to complete the authentication process.
+10. Sign in with your **GitHub account** and **password** to authenticate VS Code with GitHub Copilot.
 
-	![Step 12.png](../../media/image72.png)
+11. A popup to approve VS Code link with GitHub will appear. Click on the **Continue** button to complete the authentication process.
 
-11. A new popup will appear. Click on the **Authorize Visual-Studio-Code** button to authorize the connection.
+	![Step 11.png](../../media/image72.png)
+
+12. A new popup will appear. Click on the **Authorize Visual-Studio-Code** button to authorize the connection.
 
     ![Step 12.png](../../media/image73.png)
 
-12. VS Code will automatically come back to the screen. Before pasting the prompt, **update the Target Database details** in the prompt below with your actual Azure SQL server name and database name from envirnment. Then paste the updated prompt in the **Copilot chat** right panel and press **Enter**.
+13. VS Code will automatically come back to the screen. Before pasting the prompt, **update the Target Database details** in the prompt below with your actual Azure SQL server name and database name from envirnment. Then paste the updated prompt in the **Copilot chat** right panel and press **Enter**.
 
     > **Note:** Replace the following values with your actual Azure SQL Database details:
     > - **Server:** Update `sqlserver-inventory.database.windows.net` with your Azure SQL server name (e.g., `sql-rgworkiqlab-f1-06151713336.database.windows.net`)
     > - **Database:** Update `Retail_DB-Hyperscale` with your Azure SQL database name (e.g., `sqldb-rgworkiqlab-f1-06151713336`)
-    
-    **Prompt**
+
     ```text
     # Role
     You are an expert Database Migration Validation Engineer specializing in post-migration validation for enterprise SQL Server to Azure SQL Database migrations.
@@ -259,15 +261,19 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
     **Begin validation and generate the complete `Comparison_Report.md` file now.**
     ```
 
-    ![Step 12.png](../../media/image74.png)
+    ![Step 13.png](../../media/image74.png)
 
-13. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
+14. GitHub Copilot will ask for permission to perform subsequent actions. Click on the **Allow in the Session** button to allow Copilot to execute the necessary SQL queries and generate the comparison report.
 
-    ![Step 12.png](../../media/image75.png)
+    ![Step 14.png](../../media/image85.png)
 
-14. Click the **Preview** button to preview the generated report **.md** file.
+15. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
 
-	![Step 12.png](../../media/image76.png)
+    ![Step 15.png](../../media/image75.png)
+
+16. Click the **Preview** button to preview the generated report **.md** file.
+
+	![Step 16.png](../../media/image76.png)
 
 ## What We Learned
 
