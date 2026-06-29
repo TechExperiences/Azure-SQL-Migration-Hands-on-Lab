@@ -28,11 +28,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 ### Task 4.2: Verify Migrated Database Objects​
 
-3. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
+1. In the **Query editor Explorer**, expand the **dbo** schema and verify that the **Tables** folder contains all 15 migrated tables: **__migration_status**, **carriers**, **customers** etc.
 
 	![Step 3.png](../../media/image51.png)
 
-4. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
+2. Continue scrolling in the Explorer to verify the remaining database objects: **Views** , **Stored Procedures**, **Scalar Functions** , and **Table-Valued Functions**.
 
 	![Step 4.png](../../media/image52.png)
 
@@ -41,11 +41,11 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 
 
-5. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
+1. In the Explorer, right-click on the **customers** table and select **Select top 1000 rows** from the context menu.
 
 	![Step 5.png](../../media/image53.png)
 
-6. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
+2. The query `SELECT TOP (1000) * FROM [dbo].[customers]` will be auto-populated in the editor. Click **Run** and verify that the results display customer data in the **Results** tab, confirming the data has been successfully migrated (50 rows returned).
 
 	![Step 6.png](../../media/image54.png)
 
@@ -76,51 +76,198 @@ In this exercise, you will connect to the migrated Azure SQL Database-Hyperscale
 
 	![Step 12.png](../../media/image62.png)
 
-7. Click the **Copilot** icon in the VS Code chat panel to activate GitHub Copilot. Verify **Auto** is selected, then click the **Settings** gear icon to open model configuration options.
+7. Click on the **GitHub Copilot chat** icon on the top right of VS Code, then click on the **GitHub Copilot** icon at the right bottom to log in using your GitHub account credentials.
 
-	![Step 13.png](../../media/image63.png)
+	![Step 12.png](../../media/image70.png)
 
-8. Click **+ Add Models** to expand the available model providers, and select **Custom Endpoint** to configure a custom AI model endpoint.
 
-	![Step 14.png](../../media/image64.png)
+8. A popup will be shown. Click on the **Continue with GitHub** button to proceed with authentication.
 
-9. In the **Group Name** field, enter a name for your custom endpoint group and press **Enter** to confirm.
+	![Step 12.png](../../media/image71.png)
 
-	![Step 15.png](../../media/image65.png)
+9. Sign in with your **GitHub account** and **password** to authenticate VS Code with GitHub Copilot.
 
-10. In the **Custom Endpoint: API Key** field, enter your API key for the models and press **Enter** to confirm.
+10. A popup to approve VS Code link with GitHub will appear. Click on the **Continue** button to complete the authentication process.
 
-	![Step 16.png](../../media/image66.png)
+	![Step 12.png](../../media/image72.png)
 
-11. In the **Custom Endpoint: API Type** dropdown, select **Chat Completions** as the default request/response format for models in this group.
+11. A new popup will appear. Click on the **Authorize Visual-Studio-Code** button to authorize the connection.
 
-	![Step 17.png](../../media/image67.png)
+    ![Step 12.png](../../media/image73.png)
 
-12. VS Code opens the **chatLanguageModels.json** configuration file. In this file, copy and paste these values:
+12. VS Code will automatically come back to the screen. Before pasting the prompt, **update the Target Database details** in the prompt below with your actual Azure SQL server name and database name from envirnment. Then paste the updated prompt in the **Copilot chat** right panel and press **Enter**.
 
-    - **Model ID** - Paste in the `"id"` field:
+    > **Note:** Replace the following values with your actual Azure SQL Database details:
+    > - **Server:** Update `sqlserver-inventory.database.windows.net` with your Azure SQL server name (e.g., `sql-rgworkiqlab-f1-06151713336.database.windows.net`)
+    > - **Database:** Update `Retail_DB-Hyperscale` with your Azure SQL database name (e.g., `sqldb-rgworkiqlab-f1-06151713336`)
+    
+    **Prompt**
     ```text
-    gpt-4.1
+    # Role
+    You are an expert Database Migration Validation Engineer specializing in post-migration validation for enterprise SQL Server to Azure SQL Database migrations.
+
+    # Context
+    I have completed a database migration from an on-premises SQL Server to Azure SQL Database-Hyperscale. Both database connections are already established in VS Code using the SQL Server extension.
+
+    **Source Database (On-Premises):**
+    - Server: `localhost`
+    - Database: `Retail_Ontology`
+
+    **Target Database (Azure SQL):**
+    - Server: `sqlserver-inventory.database.windows.net`
+    - Database: `Retail_DB-Hyperscale`
+
+    # Task
+    Perform a comprehensive post-migration validation by comparing the source and target databases. Execute SQL queries using the SQL Server extension in VS Code to gather all necessary information, then generate a complete validation report as a single markdown file named `Comparison_Report.md`.
+
+    # Validation Requirements
+
+    Execute queries on both databases and compare the following aspects:
+
+    ## 1. Schema Validation
+    - Count and compare: tables, views, stored procedures, functions, triggers, user-defined types
+    - Identify missing or additional objects in either database
+    - Compare table structures: column names, data types, nullability, constraints, identity properties
+    - Verify indexes: clustered, non-clustered, primary keys, unique constraints
+    - Compare foreign key relationships and check constraints
+    - Compare database and column-level collation settings
+
+    ## 2. Data Integrity Validation
+    - Compare row counts for all tables
+    - Identify tables with row count discrepancies
+    - For the 5 largest tables, perform data sampling validation
+    - Compare critical column statistics: MIN, MAX, COUNT, NULL counts
+    - Detect potential data truncation or conversion issues
+
+    ## 3. Database Objects Validation
+    - List and compare all stored procedures (count and names)
+    - List and compare all user-defined functions (count and names)
+    - List and compare all triggers (count and names)
+    - List and compare all views (count and names)
+    - Verify database users, roles, and schema ownership
+
+    ## 4. Configuration Comparison
+    - Compare database compatibility levels
+    - Compare database collation settings
+    - Compare any relevant database properties or settings
+
+    # Output Requirements
+
+    Generate a **single, complete markdown file** named `Comparison_Report.md` with the following structure:
+
+    # Database Migration Validation Report
+
+    ## Executive Summary
+    [Provide overall validation status: PASSED/FAILED/PASSED WITH WARNINGS, total objects compared, critical findings count]
+
+    ## Validation Metadata
+    | Attribute | Value |
+    |-----------|-------|
+    | Validation Date | [timestamp] |
+    | Source Database | localhost.Retail_Ontology |
+    | Target Database | sqlserver-inventory.database.windows.net.Retail_DB-Hyperscale |
+    | Validation Method | Automated SQL-based comparison |
+    | Validator | GitHub Copilot Enterprise |
+
+    ## Schema Comparison
+
+    ### Database Objects Summary
+    | Object Type | Source Count | Target Count | Status |
+    |-------------|--------------|--------------|--------|
+    | Tables | [count] | [count] | [✅/⚠️/❌] |
+    | Views | [count] | [count] | [✅/⚠️/❌] |
+    | Stored Procedures | [count] | [count] | [✅/⚠️/❌] |
+    | Functions | [count] | [count] | [✅/⚠️/❌] |
+    | Triggers | [count] | [count] | [✅/⚠️/❌] |
+
+    ### Missing or Extra Objects
+    [List any objects that exist in source but not in target, or vice versa]
+
+    ### Table Structure Comparison
+    [Report on any schema differences in tables]
+
+    ### Index Comparison
+    [Report on index differences]
+
+    ## Data Integrity Validation
+
+    ### Row Count Comparison
+    | Table Name | Source Rows | Target Rows | Difference | Status |
+    |------------|-------------|-------------|------------|--------|
+    | [table] | [count] | [count] | [diff] | [✅/❌] |
+
+    ### Data Sampling Results
+    [Results from the 5 largest tables]
+
+    ### Column Statistics Comparison
+    [Any discrepancies in data ranges or null counts]
+
+    ## Database Objects Validation
+
+    ### Stored Procedures
+    [List comparison results]
+
+    ### Functions
+    [List comparison results]
+
+    ### Triggers
+    [List comparison results]
+
+    ### Views
+    [List comparison results]
+
+    ## Configuration Comparison
+    | Configuration | Source | Target | Status |
+    |---------------|--------|--------|--------|
+    | Compatibility Level | [value] | [value] | [✅/❌] |
+    | Collation | [value] | [value] | [✅/❌] |
+
+    ## Issues and Recommendations
+
+    ### Critical Issues (❌)
+    [List any critical problems that must be addressed]
+
+    ### Warnings (⚠️)
+    [List any warnings that should be reviewed]
+
+    ### Informational (ℹ️)
+    [List any informational items for awareness]
+
+    ## Validation Conclusion
+    [Final summary statement: database migration validated successfully, or issues requiring attention]
+
+    # Instructions for Execution
+
+    1. **Execute all necessary SQL queries** on both source and target databases using the SQL Server extension
+    2. **Collect and analyze all results** before generating the report
+    3. **Generate the complete `Comparison_Report.md` file** in a single response
+    4. **Use clear, professional formatting** following enterprise database validation standards
+    5. **Include actual data** from query results - no placeholders or dummy data
+    6. **Use status indicators**: ✅ (Pass), ⚠️ (Warning), ❌ (Fail), ℹ️ (Info)
+    7. **Provide specific object names and counts** for all discrepancies
+    8. **Keep the report concise** - include only relevant findings, exclude unnecessary details
+    9. **Do not ask follow-up questions** - generate the complete report now
+
+    # Constraints
+    - Generate the complete report in one response
+    - Use markdown tables for structured data
+    - Include only factual findings based on query results
+    - Do not include SQL query text in the report
+    - Focus on business-relevant findings, not technical noise
+    - Ensure the report is production-ready for enterprise stakeholders
+
+    **Begin validation and generate the complete `Comparison_Report.md` file now.**
     ```
 
-    - **Model Names** - Paste in both `"name"` fields:
-    ```text
-    Azure GPT-4.1
-    ```
+    ![Step 12.png](../../media/image74.png)
 
-    - **Model URL** - Paste in the `"url"` field:
-    ```text
-    https://aihub-rgworkiglab-260527163829qkor.services.ai.azure.com/openai/v1/chat/completions
-    ```
+13. GitHub Copilot will automatically generate a **Comparison report** of both the on-premises and Azure SQL Database.
 
-	![Step 18.png](../../media/image68.png)
+    ![Step 12.png](../../media/image75.png)
 
+14. Click the **Preview** button to preview the generated report **.md** file.
 
-
-
-13. Save the changes by pressing **Ctrl + S**, then click the **X** button to close the configuration file.
-
-	![Step 19.png](../../media/image69.png)
+	![Step 12.png](../../media/image76.png)
 
 ## What We Learned
 

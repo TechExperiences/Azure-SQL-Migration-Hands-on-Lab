@@ -1,0 +1,28 @@
+[
+  {
+    "Name": "Azure-SQL-Migration-Hands-on-Lab",
+    "Language": "English",
+    "Files": [
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Azure-SQL-Migration-Hands-on-Lab/refs/heads/SQL-Migration/Lab%20Overview%20%26%20Instructions.md",
+        "Order": 1
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Azure-SQL-Migration-Hands-on-Lab/refs/heads/SQL-Migration/Lab/Lab%20on%20SQL-Migration/Exercise%201%20-%20Provision%20the%20Azure%20SQL%20Migration%20Foundation/Exercise%201%20-%20Provision%20the%20Azure%20SQL%20Migration%20Foundation.md",
+        "Order": 2
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Azure-SQL-Migration-Hands-on-Lab/refs/heads/SQL-Migration/Lab/Lab%20on%20SQL-Migration/Exercise%202%20-%20Configure%20Azure%20Database%20Migration%20Service/Exercise%202%20-%20Configure%20Azure%20Database%20Migration%20Service.md",
+        "Order": 3
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Azure-SQL-Migration-Hands-on-Lab/refs/heads/SQL-Migration/Lab/Lab%20on%20SQL-Migration/Exercise%203%20-%20Execute%20the%20Database%20Migration/Exercise%203%20-%20Execute%20the%20Database%20Migration.md",
+        "Order": 4
+      },
+      {
+        "RawFilePath": "https://raw.githubusercontent.com/TechExperiences/Azure-SQL-Migration-Hands-on-Lab/refs/heads/SQL-Migration/Lab/Lab%20on%20SQL-Migration/Exercise%204%20-%20Validate%20the%20Migrated%20Azure%20SQL%20Database/Exercise%204%20-%20Validate%20the%20Migrated%20Azure%20SQL%20Database.md",
+        "Order": 5
+      }                     
+    ]  
+  }
+]

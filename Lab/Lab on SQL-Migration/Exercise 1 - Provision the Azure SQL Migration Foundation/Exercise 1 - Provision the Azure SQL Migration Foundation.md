@@ -28,6 +28,10 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 1.png](../../media/image1.png)
 
+2. A **VS Installer** pop-up will be shown. Click on the **Skip and add accounts later.** link.
+
+    ![Step 2.png](../../media/image82.png)
+
 2. In the **Connect to Server** dialog, enter the following details:
 
     - In the **Server name** field, enter:
@@ -64,25 +68,6 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 7.png](../../media/image7.png)
 
-8. In the **Object Explorer**, right-click on **localhost (SQL Server 17.0.1000.7...)** and click on **New Query**.
-
-    ![Step 8.png](../../media/image8.png)
-
-9. A new query window will open. Paste the following SQL query into the query editor:
-
-    ```sql
-    CREATE LOGIN pocadmin WITH PASSWORD = 'YourPassword@123';
-    ALTER SERVER ROLE sysadmin ADD MEMBER pocadmin;
-    ```
-
-    Then click **Execute** on the toolbar.
-
-    ![Step 9.png](../../media/image9.png)
-
-10. Validate that the message **"Commands completed successfully"** appears in the **Messages** tab at the bottom of the query window, confirming the query ran successfully.
-
-    ![Step 10.png](../../media/image10.png)
-
 
 
 ### Task 1.2: Access the Provided Azure SQL Server and Database​
@@ -101,7 +86,7 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
     Resource Groups
     ```
 
-    ![Step 2.png](../../media/image20.png)
+     ![Step 2.png](../../media/image20.png)
 
 3. In the Resource Groups list, click on **rg-workIQ-Lab**.
 
@@ -132,37 +117,35 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 
     ![Step 7.png](../../media/image25.png)
 
+8. Now click on the **cross icon** to remove the network searched text from the search bar.
+
+    ![Step 8.png](../../media/image77.png)
+
 ### Task 1.4: Test Azure SQL Database-Hyperscale Connection and Verify Empty State
 
-8. In the left panel, expand **Settings** and click on **SQL databases**. Then click on **sqldb-rgworkiqlab-f1-06151713336** from the database list.
+1. In the left panel, expand **Settings** and click on **SQL databases**. Then click on **sqldb-rgworkiqlab-f1-06151713336** from the database list.
 
-    ![Step 8.png](../../media/image26.png)
+    ![Step 9.png](../../media/image26.png)
 
-9. In the left panel, click on **Query editor (preview)**. In the Query editor login page, select **SQL Server authentication**, enter the following credentials, and click **OK**.
+2. In the left panel, click on **Query editor (preview)**. In the Query editor login page, select **SQL Server authentication**, enter the following credentials (you can find these credentials in your lab environment details), and click **OK**.
 
-    - **Login**:
+   - **Login:**
 
-        ```text
-       
-        ```
+     ```text
+     sqladmin
+     ```
 
-    - **Password**:
+   - **Password:**
 
-        ```text
-        
-        ```
+     ```text
+     (Refer to your `C:\SQL_Credentials.txt` file for the password)
+     ```
 
-    ![Step 9.png](../../media/image27.png)
+   ![Step 10.png](../../media/image27.png)
 
-10. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
+3. In the **Explorer** section on the left, expand **sqldb-rgworkiqlab-f1-0...** > **dbo** to verify the database structure. You can see **Tables**, **Views**, **Stored Procedures**, and **Functions** listed under the dbo schema, confirming the database is empty and ready for migration.
 
-    ![Step 10.png](../../media/image28.png)
-
-
-
-
-
-
+    ![Step 11.png](../../media/image28.png)
 
 
 
@@ -181,4 +164,3 @@ In this exercise, you will install and configure SQL Server and SQL Server Manag
 ## Next Exercise
 
 In the next exercise (Exercise 2), Mark will configure the Azure Database Migration Service, install and register the Self-Hosted Integration Runtime, and establish secure connectivity between the on-premises SQL Server environment and Azure SQL Database-Hyperscale. These steps will ensure that the migration infrastructure is in place and ready to support the upcoming migration process.
-

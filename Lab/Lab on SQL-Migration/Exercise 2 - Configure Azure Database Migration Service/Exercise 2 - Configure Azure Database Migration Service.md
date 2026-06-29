@@ -41,7 +41,7 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
     ![Step 5.png](../../media/image30.png)
 
-6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select Azure SQL Database-Hyperscale. 
+6. On the **Select new migration scenario** page, verify that **Source server type** is set to **SQL Server**. Click on the **Target server type** dropdown and select Azure SQL Database. 
 
     ![Step 6.png](../../media/image31.png)
 
@@ -51,31 +51,34 @@ In this exercise, you will review Azure Database Migration Service, install and 
 
 ### Task 2.2: Register the Self-Hosted Integration Runtimee
 
-8. Click on the **Windows** button on the taskbar, search for **"Microsoft Integration Runtime"**, and click on **Microsoft Integration Runtime** to launch it.
+1. Click on the **Windows** button on the taskbar, search for **"Microsoft Integration Runtime"**, and click on **Microsoft Integration Runtime** to launch it.
 
     ![Step 8.png](../../media/image33.png)
 
-9. In the **Register Integration Runtime (Self-hosted)** window, paste the copied Authentication key into the text field and click **Register**.
+2. In the **Register Integration Runtime (Self-hosted)** window, paste the copied Authentication key into the text field and click **Register**.
 
     ![Step 9.png](../../media/image34.png)
 
-10. On the **New Integration Runtime (Self-hosted) Node** page, verify the node name is displayed (e.g., **vm-azure-sql-on**) and click **Finish**.
+3. On the **New Integration Runtime (Self-hosted) Node** page, verify the node name is displayed (e.g., **vm-azure-sql-on**) and click **Finish**.
 
     ![Step 10.png](../../media/image35.png)
 
-11. Once the registration is successful, you will see the message **"Integration Runtime (Self-hosted) node has been registered successfully."** Click on **Launch Configuration Manager**.
+4. Once the registration is successful, you will see the message **"Integration Runtime (Self-hosted) node has been registered successfully."** Click on **Launch Configuration Manager**.
 
     ![Step 11.png](../../media/image36.png)
 
 ### Task 2.3: Verify Connectivity Through the Integration Runtime
 
-12. The **Microsoft Integration Runtime Configuration Manager** opens. Verify that the status shows **"Self-hosted node is connected to the cloud service"** and the connection status at the bottom displays **"Connected to the cloud service (Data Factory V2)"**.
+1. The **Microsoft Integration Runtime Configuration Manager** opens. Verify that the status shows **"Self-hosted node is connected to the cloud service"** and the connection status at the bottom displays **"Connected to the cloud service (Data Factory V2)"**.
 
     ![Step 12.png](../../media/image37.png)
 
-13. Go back to the Azure Portal. In the **Configure integration runtime** panel on the right, click **Refresh**. The error message indicating "Integration Runtime not registered" will disappear, confirming the Self-Hosted Integration Runtime is successfully configured. Then click **Select** at the bottom of the page.
+    > **Note:** It may take a few moments for the status to update to "Connected." During this time, it may briefly display "Inactive."
+
+2. Go back to the Azure Portal. In the **Configure integration runtime** panel on the right, click **Refresh**. The error message indicating "Integration Runtime not registered" will disappear, confirming the Self-Hosted Integration Runtime is successfully configured. Then click **Select** at the bottom of the page.
 
     ![Step 13.png](../../media/image38.png)
+
 
 
 ## What We Learned
