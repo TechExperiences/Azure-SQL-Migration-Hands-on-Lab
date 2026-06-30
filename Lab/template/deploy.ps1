@@ -534,7 +534,7 @@ function Save-SqlCredentialsToFile {
         "SqlDatabaseName: $SqlDatabaseName",
         "SqlAdminLogin: $SqlAdminLogin",
         "SqlAdminPassword: $SqlAdminPassword"
-    )
+    ) 
 
     Set-Content -Path $filePath -Value $lines -Encoding utf8
 
