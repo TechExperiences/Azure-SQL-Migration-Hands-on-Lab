@@ -44,8 +44,7 @@ param(
     [string]$DmsServiceNameTemplate = "",
     [int]$SqlServerNameMaxLength = 0,
     [int]$SqlDatabaseNameMaxLength = 0,
-    [int]$DmsServiceNameMaxLength = 0
-    ,
+    [int]$DmsServiceNameMaxLength = 0,
     [int]$BicepGeneratedSuffixLength = 0,
     [int]$BicepRgTokenLength = 0,
     [string]$BicepDeploymentAttemptLabel = "",
