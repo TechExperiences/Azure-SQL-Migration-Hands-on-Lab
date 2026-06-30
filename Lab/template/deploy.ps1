@@ -528,7 +528,6 @@ function Save-SqlCredentialsToFile {
 
     $lines = @(
         "CreatedOnUtc: $((Get-Date).ToUniversalTime().ToString($CredentialsCreatedOnUtcFormat))",
-        "SqlServerName: $SqlServerName",
         "SqlServerFqdn: $SqlServerName.database.windows.net",
         "SqlDatabaseName: $SqlDatabaseName",
         "SqlAdminLogin: $SqlAdminLogin",
